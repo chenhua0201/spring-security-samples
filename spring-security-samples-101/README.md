@@ -2,7 +2,7 @@
 示例101。
 
 # 说明
-## 1. 完全使用默认配置：
+## 1. 完全使用默认配置
   - 启动时自动创建一个用户
     - 用户名：`user`
     - 随机密码，见INFO级别的日志：`Using generated security password`
