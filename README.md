@@ -27,7 +27,7 @@ Spring Security 5 示例。
   - JWT
 
 ## OAuth2
-### token
+### Opaque Token
 - 自定义生成、存储、有效期
 ### JWT
 - TODO
@@ -38,7 +38,7 @@ Spring Security 5 示例。
 
 ## 鉴权
 - 101  
-  完全使用默认配置：
+  完全使用默认配置
 - 102  
   自定义密码编解码器
 - 103  
