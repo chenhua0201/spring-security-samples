@@ -3,9 +3,9 @@ Spring Security 5 示例。
 
 
 # 软件版本
-- Spring Boot 2.3.1
+- Spring Boot 2.3.2
 - Spring Security 5.3.3
-- Spring Framework 5.2.7
+- Spring Framework 5.2.8
 - JDK 8+
 
 # 最终形态
@@ -20,9 +20,9 @@ Spring Security 5 示例。
 - ANT风格URI授权
 - RBAC0
 - 凭证
-  - Servlet Session  
+  - Servlet Session
   使用Spring Session Data Redis实现分布式session
-  - Token header  
+  - Token header
   自定义生成、存储、有效期、header名称
   - JWT
 
@@ -37,15 +37,15 @@ Spring Security 5 示例。
 **所有项目运行于Servlet而不是WebFlux环境。**
 
 ## 鉴权
-- 101  
+- 101
   完全使用默认配置
-- 102  
+- 102
   自定义用户名、密码、密码编解码器
-- 103  
+- 103
   自定义用户
-  
+
 ## 鉴权+授权
 
 ## 鉴权+授权+OAuth2
-  
+
 ## OAuth2授权服务器
