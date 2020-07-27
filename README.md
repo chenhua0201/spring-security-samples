@@ -16,10 +16,10 @@ Spring Security 5 示例。
 ## 账号密码
 - RESTful 登录、注销、未登录、未授权
 - 用户数据在MySQL
-- 授权数据在MySQL，并缓存在JVM或Redis
+- 授权数据在MySQL，并缓存在JVM或（和）Redis
 - ANT风格URI授权
 - RBAC0
-- 凭证
+- 会话保持
   - Servlet Session
   使用Spring Session Data Redis实现分布式session
   - Token header
@@ -40,9 +40,9 @@ Spring Security 5 示例。
 - 101
   完全使用默认配置
 - 102
-  自定义用户名、密码、密码编码器
+  设置内存用户的用户名、密码、密码编码器
 - 103
-  自定义用户
+  创建多个内存用户
 
 ## 鉴权+授权
 
