@@ -17,6 +17,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		// 创建多个内存用户
 		auth.inMemoryAuthentication()
 				.withUser("zhangsan")// 用户张三
 				.password(passwordEncoder.encode("111111"))
