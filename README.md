@@ -10,7 +10,7 @@ Spring Security 5 示例。
 
 # 最终形态
 - 前后端分离
-- 无状态
+- 无状态会话。分布式session，或token header
 
 
 ## 账号密码
@@ -47,6 +47,8 @@ Spring Security 5 示例。
   设置登录接口地址、注销接口地址
 - 105
   设置URI是否需要鉴权
+- 201
+  自定义`UserDetailsService`，从MySQL读取用户数据
 
 ## 鉴权+授权
 
