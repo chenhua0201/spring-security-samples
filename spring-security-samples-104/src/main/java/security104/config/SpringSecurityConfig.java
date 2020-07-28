@@ -34,9 +34,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		/**
 		 * 关闭csrf，否则请求登录时，必须在请求注销的表单里加上：
 		 *
-		 * <pre>
 		 * <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		 * </pre>
 		 */
 		http.csrf()
 				.disable()// 关闭csrf
