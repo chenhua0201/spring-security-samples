@@ -47,6 +47,8 @@ Spring Security 5 示例。
   设置登录接口地址、注销接口地址
 - 105
   设置URI是否需要鉴权
+- 106
+  使用Spring Session Redis实现分布式session。
 - 201
   自定义`UserDetailsService`，从MySQL读取用户数据
 
