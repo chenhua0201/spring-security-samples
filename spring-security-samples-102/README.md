@@ -8,6 +8,7 @@
   - UserDetailsServiceAutoConfiguration
     创建了`InMemoryUserDetailsManager`。
 
+
 ## 2. 设置用户名和密码
 编辑application.yml
   ```
@@ -17,6 +18,7 @@
         name: zhangsan
         password: 87654321
   ```
+
 
 ## 3. 设置密码编码器PasswordEncoder
 编辑application.yml，password改成经bcrypt编码后的字符串，再加上`org.springframework.security.crypto.password.DelegatingPasswordEncoder`定义的前缀，

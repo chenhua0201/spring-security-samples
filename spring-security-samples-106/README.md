@@ -10,5 +10,6 @@
 ## 2. 自定义session超时时长
   - 见`application.yml`：`spring.servlet.session.timeout`
 
+
 ## 3. 客户端通过cookie保持会话
   - cookie名称为`SESSION`

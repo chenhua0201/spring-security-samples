@@ -3,6 +3,7 @@ package security107.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -26,6 +27,17 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.withUser("lisi")// 用户李四
 				.password(passwordEncoder.encode("222222"))
 				.roles("");// 本例不需要角色
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf()
+				.disable()// 关闭csrf，避免postman之类的客户端无法获得csrf token
+				.authorizeRequests()
+				.anyRequest()
+				.authenticated()
+				.and()
+				.formLogin();
 	}
 
 }
