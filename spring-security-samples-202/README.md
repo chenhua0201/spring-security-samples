@@ -1,5 +1,5 @@
-# spring-security-samples-201
-示例201。
+# spring-security-samples-202
+示例202。
 
 # 说明
 ## 1. 会话
@@ -34,6 +34,34 @@
 
 ### 2.3 自定义`UserDetailService`
   - 创建`AuthAccountUserDetailsServiceImpl`
+
+
+## 3. RESTful
+### 3.1 登录请求
+  - 见`restful.LoginForm`
+
+
+### 3.2 认证成功响应
+  - 见`restful.LoginResult`
+
+
+### 3.3 认证失败响应
+  - 见`restful.RestAuthenticationFailureHandler`
+  - 返回状态码400和JSON格式消息  
+```
+  {
+    "message": "账号或密码错误",
+    "code": "LoginError.FAIL"
+  }
+```
+
+
+### 3.4 未认证401响应
+  - 见`HttpStatusEntryPoint`，返回状态码401
+
+
+### 3.5 未授权403响应
+  - 见`restful.RestAccessDeniedHandler`，返回状态码403
 
 
 # 数据库

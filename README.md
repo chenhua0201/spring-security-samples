@@ -38,21 +38,39 @@ Spring Security 5 示例。
 
 ## 鉴权
 - 101
-  完全使用默认配置
+  + 完全使用默认配置
+
 - 102
-  设置内存用户的用户名、密码、密码编码器
+  + 设置内存用户的用户名、密码、密码编码器
+
 - 103
-  创建多个内存用户
+  + 创建多个内存用户
+
 - 104
-  设置登录接口地址、注销接口地址
+  + 设置登录接口地址、注销接口地址
+
 - 105
-  设置URI是否需要鉴权
+  + 设置URI是否需要鉴权
+
 - 106
-  使用Spring Session Redis实现分布式session。客户端通过cookie传递session id。
+  + 使用Spring Session Redis实现分布式session
+  + 客户端通过cookie传递session id
+
 - 107
-  使用Spring Session Redis实现分布式session，客户端通过HTTP header传递session id。
+  + 使用Spring Session Redis实现分布式session
+  + 客户端通过HTTP header传递session id
+
 - 201
-  自定义`UserDetailsService`，从MySQL读取用户数据
+  + 使用Spring Session Redis实现分布式session
+  + 客户端通过HTTP header传递session id
+  + 自定义`UserDetailsService`，从MySQL读取用户数据
+
+- 202
+  + 使用Spring Session Redis实现分布式session
+  + 客户端通过HTTP header传递session id
+  + 定义`UserDetailsService`，从MySQL读取用户数据
+  + RESTful请求和响应
+
 
 ## 鉴权+授权
 
