@@ -49,6 +49,8 @@ Spring Security 5 示例。
   设置URI是否需要鉴权
 - 106
   使用Spring Session Redis实现分布式session。
+- 107
+  使用Spring Session Redis实现分布式session，客户端通过HTTP header传递session id。
 - 201
   自定义`UserDetailsService`，从MySQL读取用户数据
 
