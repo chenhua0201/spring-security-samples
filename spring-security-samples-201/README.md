@@ -27,7 +27,7 @@ CREATE TABLE `auth_account` (
 
 ## 2. 初始化账号数据
 ```
---  登录名：zhangsan； 密码：111111
+--  登录名：zhangsan； 密码：87654321
 insert  into `auth_account`(`id`,`username`,`password`,`enabled`,`deleted`) values
-('4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','zhangsan','{bcrypt}$2y$10$zx1/azyHgk94H0vFH/4OV.k7Nvh7MwB6G.1zMxqscc6B.kuIi.I9q',1,0);
+('4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','zhangsan','{bcrypt}$2y$10$mwZYr0mQlXIfaAwBezsBVuEK2cC2zZjJzWGhd.m0dX1iTHDusd3u6',1,0);
 ```

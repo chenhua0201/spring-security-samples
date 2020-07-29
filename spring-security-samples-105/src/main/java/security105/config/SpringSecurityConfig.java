@@ -21,7 +21,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		// 创建多个内存用户
 		auth.inMemoryAuthentication()
 				.withUser("zhangsan")// 用户张三
-				.password(passwordEncoder.encode("111111"))
+				.password(passwordEncoder.encode("87654321"))
 				.roles("")// 本例不需要角色
 				.and()
 				.withUser("lisi")// 用户李四
