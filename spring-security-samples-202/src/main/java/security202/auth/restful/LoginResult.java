@@ -10,7 +10,7 @@ import lombok.Data;
 @Builder
 public class LoginResult {
 
-	private String userId;
+	private String accountId;
 
 	private String username;
 

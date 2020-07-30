@@ -41,7 +41,7 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		final AuthAccountUserDetails userDetails = (AuthAccountUserDetails) token.getPrincipal();
 
 		final LoginResult result = LoginResult.builder()
-				.userId(userDetails.getId())
+				.accountId(userDetails.getId())
 				.username(userDetails.getUsername())
 				.build();
 
