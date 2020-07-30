@@ -12,10 +12,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import security202.restful.LoginFormAuthenticationFilter;
-import security202.restful.RestAccessDeniedHandler;
-import security202.restful.RestAuthenticationFailureHandler;
-import security202.restful.RestAuthenticationSuccessHandler;
+import security202.auth.restful.LoginFormAuthenticationFilter;
+import security202.auth.restful.RestAccessDeniedHandler;
+import security202.auth.restful.RestAuthenticationFailureHandler;
+import security202.auth.restful.RestAuthenticationSuccessHandler;
 
 /**
  * Spring security配置。

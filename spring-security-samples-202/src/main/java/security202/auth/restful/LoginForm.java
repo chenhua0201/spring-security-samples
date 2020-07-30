@@ -1,4 +1,4 @@
-package security202.restful;
+package security202.auth.restful;
 
 import lombok.Data;
 
