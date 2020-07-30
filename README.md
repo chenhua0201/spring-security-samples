@@ -36,7 +36,7 @@ Spring Security 5 示例。
 # 子项目说明
 **所有项目运行于Servlet而不是WebFlux环境。**
 
-## 鉴权
+## 认证
 - 101
   + 完全使用默认配置
 
@@ -50,7 +50,7 @@ Spring Security 5 示例。
   + 设置登录接口地址、注销接口地址
 
 - 105
-  + 设置URI是否需要鉴权
+  + 设置URI是否需要认证
 
 - 106
   + 使用Spring Session Redis实现分布式session
@@ -72,8 +72,8 @@ Spring Security 5 示例。
   + RESTful请求和响应
 
 
-## 鉴权+授权
+## 认证+授权
 
-## 鉴权+授权+OAuth2
+## 认证+授权+OAuth2
 
 ## OAuth2授权服务器
