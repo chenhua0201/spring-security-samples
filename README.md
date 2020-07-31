@@ -1,7 +1,6 @@
 # spring-security-samples
 Spring Security 5 示例。
 
-
 # 软件版本
 - Spring Boot 2.3.2
 - Spring Security 5.3.3
@@ -11,7 +10,6 @@ Spring Security 5 示例。
 # 最终形态
 - 前后端分离
 - 无状态会话。分布式session，或token header
-
 
 ## 账号密码
 - RESTful 登录、注销、未登录、未授权
@@ -31,7 +29,6 @@ Spring Security 5 示例。
 - 自定义生成、存储、有效期
 ### JWT
 - TODO
-
 
 # 子项目说明
 **所有项目运行于Servlet而不是WebFlux环境。**
@@ -70,7 +67,6 @@ Spring Security 5 示例。
   + 客户端通过HTTP header传递session id
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
-
 
 ## 认证+授权
 
