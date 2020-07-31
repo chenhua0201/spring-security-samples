@@ -18,18 +18,14 @@ Spring Security 5 示例。
 - ANT风格URI授权
 - RBAC0
 - 会话保持
-  + Servlet Session
+  + Servlet Session  
   使用Spring Session Data Redis实现分布式session
-  + Token header
+  + Token header  
   自定义生成、存储、有效期、header名称
-  - JWT
 
 ## 2. OAuth2
 ### 2.1 Opaque Token
 - 自定义生成、存储、有效期
-
-### 2.2 JWT
-- TODO
 
 # 子项目说明
 **所有项目运行于Servlet而不是WebFlux环境。**
