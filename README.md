@@ -11,7 +11,7 @@ Spring Security 5 示例。
 - 前后端分离
 - 无状态会话。分布式session，或token header
 
-## 账号密码
+## 1. 账号密码
 - RESTful 登录、注销、未登录、未授权
 - 用户数据在MySQL
 - 授权数据在MySQL，并缓存在JVM或（和）Redis
@@ -24,10 +24,11 @@ Spring Security 5 示例。
   自定义生成、存储、有效期、header名称
   - JWT
 
-## OAuth2
-### Opaque Token
+## 2. OAuth2
+### 2.1 Opaque Token
 - 自定义生成、存储、有效期
-### JWT
+
+### 2.2 JWT
 - TODO
 
 # 子项目说明
@@ -65,6 +66,12 @@ Spring Security 5 示例。
 - 202
   + 使用Spring Session Redis实现分布式session
   + 客户端通过HTTP header传递session id
+  + 自定义`UserDetailsService`，从MySQL读取用户数据
+  + RESTful请求和响应
+
+- 203
+  + 使用Token保持会话
+  + 客户端通过HTTP header传递token
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
 
