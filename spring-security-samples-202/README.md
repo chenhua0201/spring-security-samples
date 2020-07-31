@@ -28,7 +28,7 @@ RESTful请求和响应。
 ## 2.2 自定义`UserDetails`
   - 创建`AuthAccountUserDetails`
 
-## 2.3 自定义`UserDetailService`
+## 2.3 自定义`UserDetailsService`
   - 创建`AuthAccountUserDetailsServiceImpl`
 
 # 3. RESTful
