@@ -25,18 +25,18 @@ import security301.auth.AuthAccountUserDetailsServiceImpl;
 @Component
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
-	private final AuthAccountUserDetailsServiceImpl userDetailsService;
-
 	private final TokenProperties tokenProperties;
 
 	private final TokenService tokenService;
 
+	private final AuthAccountUserDetailsServiceImpl userDetailsService;
+
 	@Autowired
-	public TokenAuthenticationFilter(AuthAccountUserDetailsServiceImpl userDetailsService,
-			TokenProperties tokenProperties, TokenService tokenService) {
-		this.userDetailsService = userDetailsService;
+	public TokenAuthenticationFilter(TokenProperties tokenProperties, TokenService tokenService,
+			AuthAccountUserDetailsServiceImpl userDetailsService) {
 		this.tokenProperties = tokenProperties;
 		this.tokenService = tokenService;
+		this.userDetailsService = userDetailsService;
 	}
 
 	@Override
