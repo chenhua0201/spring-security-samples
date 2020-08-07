@@ -3,7 +3,7 @@ Spring Security 5 示例。
 
 # 软件版本
 - Spring Boot 2.3.2
-- Spring Security 5.3.3
+- Spring Security 5.3.4
 - Spring Framework 5.2.8
 - JDK 8+
 

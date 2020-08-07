@@ -11,6 +11,7 @@ RESTful请求和响应。
   - 自定义生成规则。本例用UUID，见`security203.auth.token.TokenGeneratorUuid`
   - 自定义header名称、header值前缀、token有效期、token在redis的key前缀， 见`security203.auth.token.TokenProperties`
   - 自定义存储。本例用redis
+  - `RedisTemplate`的值序列化改为JSON
 
 ## 1.3 客户端通过HTTP header保持会话
   - `TokenProperties`定义header名称。本例是`Authorization`

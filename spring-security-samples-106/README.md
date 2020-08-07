@@ -4,6 +4,7 @@
 # 1. 分布式session
   - Session存储在Redis
   - 使用Spring Session Redis
+  - `RedisTemplate`的值序列化改为JSON
 
 # 2. 自定义session超时时长
   - 见`application.yml`：`spring.servlet.session.timeout`
