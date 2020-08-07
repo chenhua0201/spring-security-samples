@@ -1,7 +1,5 @@
 package security107.config;
 
-import java.net.UnknownHostException;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -17,13 +15,11 @@ public class RedisConfig {
 	/**
 	 * 值序列化改为JSON。
 	 *
-	 * @param redisConnectionFactory
-	 * @return
-	 * @throws UnknownHostException
+	 * @param redisConnectionFactory RedisConnectionFactory
+	 * @return RedisTemplate
 	 */
 	@Bean
-	public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory)
-			throws UnknownHostException {
+	public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
 		final RedisTemplate<Object, Object> template = new RedisTemplate<>();
 		template.setConnectionFactory(redisConnectionFactory);
 		template.setValueSerializer(RedisSerializer.json());
