@@ -32,7 +32,7 @@
   - 创建`AuthAccountUserDetailsServiceImpl`
 
 # 数据库
-# 1. 账号表`auth_account`
+## 1. 账号表`auth_account`
 ```
 CREATE TABLE `auth_account` (
   `id` varchar(36) NOT NULL COMMENT 'ID',
@@ -45,7 +45,7 @@ CREATE TABLE `auth_account` (
 ) COMMENT='账号'
 ```
 
-# 2. 初始化账号数据
+### 1.1 初始化账号数据
 ```
 --  登录名：zhangsan； 密码：87654321
 insert  into `auth_account`(`id`,`username`,`password`,`enabled`,`deleted`) values
