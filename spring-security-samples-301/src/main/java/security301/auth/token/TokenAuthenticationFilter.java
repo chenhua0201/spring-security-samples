@@ -10,14 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import security301.auth.AuthAccountUserDetailsServiceImpl;
+import security301.auth.AuthAccountUserDetails;
 
 /**
  * 认证token过滤器。
@@ -29,14 +28,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
 	private final TokenService tokenService;
 
-	private final AuthAccountUserDetailsServiceImpl userDetailsService;
-
 	@Autowired
-	public TokenAuthenticationFilter(TokenProperties tokenProperties, TokenService tokenService,
-			AuthAccountUserDetailsServiceImpl userDetailsService) {
+	public TokenAuthenticationFilter(TokenProperties tokenProperties, TokenService tokenService) {
 		this.tokenProperties = tokenProperties;
 		this.tokenService = tokenService;
-		this.userDetailsService = userDetailsService;
 	}
 
 	@Override
@@ -49,21 +44,19 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 					.trim();
 			final TokenValue tokenValue = tokenService.findByToken(token);
 			if (tokenValue != null) {
-				final Authentication existingAuthentication = SecurityContextHolder.getContext()
-						.getAuthentication();
-				if (existingAuthentication == null) {
-					// 没有用户信息，则重新加载
-					final UserDetails userDetails = userDetailsService.loadUserByUsername(tokenValue.getUsername());
+				// 查询用户
+				final AuthAccountUserDetails userDetails = new AuthAccountUserDetails(tokenValue.getAccountId(),
+						tokenValue.getUsername(), ""/* password */);
 
-					final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-							userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+				final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+						userDetails, userDetails.getPassword(), userDetails.getAuthorities());
 
-					authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-					// 认证成功
-					SecurityContextHolder.getContext()
-							.setAuthentication(authentication);
-				}
+				// 认证成功
+				final SecurityContext context = SecurityContextHolder.createEmptyContext();
+				context.setAuthentication(authentication);
+				SecurityContextHolder.setContext(context);
 			}
 		}
 

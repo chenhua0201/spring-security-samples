@@ -8,25 +8,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import lombok.AllArgsConstructor;
 import security203.auth.AuthAccountUserDetails;
 
 /**
  * 认证token过滤器。
  */
 @Component
-@AllArgsConstructor
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
 	private final TokenProperties tokenProperties;
 
 	private final TokenService tokenService;
+
+	@Autowired
+	public TokenAuthenticationFilter(TokenProperties tokenProperties, TokenService tokenService) {
+		this.tokenProperties = tokenProperties;
+		this.tokenService = tokenService;
+	}
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -48,8 +54,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
 				// 认证成功
-				SecurityContextHolder.getContext()
-						.setAuthentication(authentication);
+				final SecurityContext context = SecurityContextHolder.createEmptyContext();
+				context.setAuthentication(authentication);
+				SecurityContextHolder.setContext(context);
 			}
 		}
 
