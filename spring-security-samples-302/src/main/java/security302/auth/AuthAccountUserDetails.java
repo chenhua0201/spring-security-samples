@@ -1,4 +1,4 @@
-package security203.auth;
+package security302.auth;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import security203.auth.entity.AuthAccount;
+import security302.auth.entity.AuthAccount;
 
 /**
  * 账号实现的{@link UserDetails}。

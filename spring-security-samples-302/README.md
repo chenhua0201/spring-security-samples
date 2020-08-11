@@ -1,10 +1,10 @@
-# spring-security-samples-301
+# spring-security-samples-302
 使用Token保持会话。  
 客户端通过HTTP header传递token。  
 自定义`UserDetailsService`，从MySQL读取用户数据。  
 RESTful请求和响应。  
 增加角色。
-在配置里对URI授权。
+在Java方法上授权。
 
 # 1. 会话
 ## 1.1 禁用session
@@ -64,7 +64,8 @@ RESTful请求和响应。
   - `AuthAccountUserDetailsServiceImpl`加载 `UserDetails`时，从MySQL的`auth_role`表读取角色
 
 # 5. 授权
-  - 在`HttpSecurity`设置URI所需的角色
+  - 启用`@EnableGlobalMethodSecurity(prePostEnabled = true)`
+  - 在Java方法上增加`@PreAuthorize("hasRole('ADMIN')")`
 
 ## 5.1 现象
   - zhangsan有角色ADMIN，所以有权访问`/hello`；而lisi无权访问，返回状态码403

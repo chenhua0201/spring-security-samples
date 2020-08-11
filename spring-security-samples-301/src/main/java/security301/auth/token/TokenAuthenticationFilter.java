@@ -24,12 +24,16 @@ import security301.auth.AuthAccountUserDetails;
 @Component
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
+	private final GrantedAuthorityConverter grantedAuthorityConverter;
+
 	private final TokenProperties tokenProperties;
 
 	private final TokenService tokenService;
 
 	@Autowired
-	public TokenAuthenticationFilter(TokenProperties tokenProperties, TokenService tokenService) {
+	public TokenAuthenticationFilter(GrantedAuthorityConverter grantedAuthorityConverter,
+			TokenProperties tokenProperties, TokenService tokenService) {
+		this.grantedAuthorityConverter = grantedAuthorityConverter;
 		this.tokenProperties = tokenProperties;
 		this.tokenService = tokenService;
 	}
@@ -44,12 +48,13 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 					.trim();
 			final TokenValue tokenValue = tokenService.findByToken(token);
 			if (tokenValue != null) {
-				// 查询用户
+				// 设置UsernamePasswordAuthenticationToken
 				final AuthAccountUserDetails userDetails = new AuthAccountUserDetails(tokenValue.getAccountId(),
-						tokenValue.getUsername(), ""/* password */);
+						tokenValue.getUsername(), null/* password */);
 
 				final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+						userDetails, userDetails.getPassword(),
+						grantedAuthorityConverter.decode(tokenValue.getAuthorities()));
 
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

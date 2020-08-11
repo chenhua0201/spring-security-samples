@@ -1,4 +1,4 @@
-package security203.auth.token;
+package security302.auth.token;
 
 import java.io.IOException;
 
@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import security203.auth.AuthAccountUserDetails;
+import security302.auth.AuthAccountUserDetails;
 
 /**
  * 认证token过滤器。

@@ -1,4 +1,4 @@
-package security203.auth.token;
+package security302.auth.token;
 
 import java.util.Set;
 

@@ -2,6 +2,7 @@ package security201.auth;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,30 +16,40 @@ public class AuthAccountUserDetails implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
-	private final String id;
-
-	private final String username;
-
-	private final String password;
-
 	private final boolean accountNonExpired;
 
 	private final boolean accountNonLocked;
+
+	// 角色名称
+	private final Set<GrantedAuthority> authorities;
 
 	private final boolean credentialsNonExpired;
 
 	private final boolean enabled;
 
+	private final String id;
+
+	private final String password;
+
+	private final String username;
+
 	public AuthAccountUserDetails(AuthAccount account) {
-		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, account.isEnabled());
+		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, account.isEnabled(),
+				Collections.emptySet());
+	}
+
+	public AuthAccountUserDetails(AuthAccount account, Set<GrantedAuthority> authorities) {
+		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, account.isEnabled(),
+				authorities);
 	}
 
 	public AuthAccountUserDetails(String id, String username, String password) {
-		this(id, username, password, true, true, true, true);
+		this(id, username, password, true, true, true, true, Collections.emptySet());
 	}
 
 	public AuthAccountUserDetails(String id, String username, String password, boolean accountNonExpired,
-			boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled) {
+			boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled,
+			Set<GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -46,12 +57,12 @@ public class AuthAccountUserDetails implements UserDetails {
 		this.accountNonLocked = accountNonLocked;
 		this.credentialsNonExpired = credentialsNonExpired;
 		this.enabled = enabled;
+		this.authorities = authorities;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// 空，本例不需要角色
-		return Collections.emptySet();
+		return authorities;
 	}
 
 	public String getId() {
@@ -91,7 +102,7 @@ public class AuthAccountUserDetails implements UserDetails {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("AuthAccountUserDetails [id=");
+		builder.append("AccountUserDetails [id=");
 		builder.append(id);
 		builder.append(", username=");
 		builder.append(username);

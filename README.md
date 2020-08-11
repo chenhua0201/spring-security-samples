@@ -77,8 +77,17 @@ Spring Security 5 示例。
   + 客户端通过HTTP header传递token
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
-  + 增加授权中的角色，但不含权限
+  + 增加角色
+  + 在配置里对URI授权
 
+- 302
+  + 使用Token保持会话
+  + 客户端通过HTTP header传递token
+  + 自定义`UserDetailsService`，从MySQL读取用户数据
+  + RESTful请求和响应
+  + 增加角色
+  + 在Java方法上授权
+ 
 ## 认证+授权+OAuth2
 
 ## OAuth2授权服务器

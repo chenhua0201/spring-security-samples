@@ -1,4 +1,4 @@
-package security301.auth.restful;
+package security302.auth.restful;
 
 import java.io.IOException;
 
@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import security301.auth.AuthAccountUserDetails;
-import security301.auth.token.GrantedAuthorityConverter;
-import security301.auth.token.TokenProperties;
-import security301.auth.token.TokenService;
-import security301.auth.token.TokenValue;
+import security302.auth.AuthAccountUserDetails;
+import security302.auth.token.GrantedAuthorityConverter;
+import security302.auth.token.TokenProperties;
+import security302.auth.token.TokenService;
+import security302.auth.token.TokenValue;
 
 /**
  * 认证成功后，返回状态码200而不是301；同时返回用户信息。

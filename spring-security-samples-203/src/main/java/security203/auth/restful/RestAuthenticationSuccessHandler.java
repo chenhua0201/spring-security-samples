@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import security203.auth.AuthAccountUserDetails;
+import security203.auth.token.GrantedAuthorityConverter;
 import security203.auth.token.TokenProperties;
 import security203.auth.token.TokenService;
 import security203.auth.token.TokenValue;
@@ -26,6 +27,8 @@ import security203.auth.token.TokenValue;
 @Component
 public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
+	private final GrantedAuthorityConverter grantedAuthorityConverter;
+
 	private final ObjectMapper objectMapper;
 
 	private final TokenProperties tokenProperties;
@@ -33,8 +36,9 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	private final TokenService tokenService;
 
 	@Autowired
-	public RestAuthenticationSuccessHandler(ObjectMapper objectMapper, TokenProperties tokenProperties,
-			TokenService tokenService) {
+	public RestAuthenticationSuccessHandler(GrantedAuthorityConverter grantedAuthorityConverter,
+			ObjectMapper objectMapper, TokenProperties tokenProperties, TokenService tokenService) {
+		this.grantedAuthorityConverter = grantedAuthorityConverter;
 		this.objectMapper = objectMapper;
 		this.tokenProperties = tokenProperties;
 		this.tokenService = tokenService;
@@ -54,6 +58,7 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 		final String authToken = tokenService.create(userDetails, TokenValue.builder()
 				.accountId(userDetails.getId())
 				.username(userDetails.getUsername())
+				.authorities(grantedAuthorityConverter.encode(userDetails.getAuthorities()))
 				.build());
 
 		final LoginResult result = LoginResult.builder()
