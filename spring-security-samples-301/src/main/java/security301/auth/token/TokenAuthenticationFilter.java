@@ -47,7 +47,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 			token = StringUtils.removeStart(token, tokenProperties.getHeaderValuePrefix())
 					.trim();
 			final TokenValue tokenValue = tokenService.findByToken(token);
-			if (tokenValue != null) {
+			if (tokenValue != null && SecurityContextHolder.getContext()
+					.getAuthentication() == null) {
 				// 设置UsernamePasswordAuthenticationToken
 				final AuthAccountUserDetails userDetails = new AuthAccountUserDetails(tokenValue.getAccountId(),
 						tokenValue.getUsername(), null/* password */);
