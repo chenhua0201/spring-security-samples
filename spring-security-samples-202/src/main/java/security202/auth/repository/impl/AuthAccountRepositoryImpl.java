@@ -25,8 +25,6 @@ public class AuthAccountRepositoryImpl implements AuthAccountRepository {
 		account.setId(rs.getString(index++));
 		account.setUsername(rs.getString(index++));
 		account.setPassword(rs.getString(index++));
-		account.setEnabled(rs.getBoolean(index++));
-		account.setDeleted(rs.getBoolean(index++));
 
 		return account;
 	};
@@ -40,7 +38,7 @@ public class AuthAccountRepositoryImpl implements AuthAccountRepository {
 
 	@Override
 	public AuthAccount findByUsername(String username) {
-		final String sql = "SELECT id,username,password,enabled,deleted FROM auth_account WHERE username=? AND deleted=FALSE";
+		final String sql = "SELECT id,username,password FROM auth_account WHERE username=?";
 
 		final List<AuthAccount> accounts = jdbcTemplate.query(sql, new Object[] { username }, authAccountMapper);
 

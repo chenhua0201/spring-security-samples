@@ -77,8 +77,6 @@ CREATE TABLE `auth_account` (
   `id` varchar(36) NOT NULL COMMENT 'ID',
   `username` varchar(30) NOT NULL COMMENT '登录名',
   `password` varchar(80) NOT NULL COMMENT '登录密码',
-  `enabled` tinyint(1) NOT NULL DEFAULT '1' COMMENT '是否启用',
-  `deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已删除',
   PRIMARY KEY (`id`),
   UNIQUE KEY `udx_username` (`username`)
 ) COMMENT='账号'
@@ -87,12 +85,12 @@ CREATE TABLE `auth_account` (
 ### 1.1 初始化账号数据
 ```
 --  登录名：zhangsan； 密码：87654321
-insert  into `auth_account`(`id`,`username`,`password`,`enabled`,`deleted`) values
-('4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','zhangsan','{bcrypt}$2y$10$mwZYr0mQlXIfaAwBezsBVuEK2cC2zZjJzWGhd.m0dX1iTHDusd3u6',1,0);
+insert  into `auth_account`(`id`,`username`,`password`) values
+('4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','zhangsan','{bcrypt}$2y$10$mwZYr0mQlXIfaAwBezsBVuEK2cC2zZjJzWGhd.m0dX1iTHDusd3u6');
 
 -- 登录名：lisi；密码：88888888
-insert  into `auth_account`(`id`,`username`,`password`,`enabled`,`deleted`) values
-('b2516679-0e54-4390-b877-198a1678c09a','lisi','{bcrypt}$2y$10$X/l.uHOi36hnQiRM0xzfT.lbsu1untgBtXg3CAsMlhcGZtfetpnru',1,0);
+insert  into `auth_account`(`id`,`username`,`password`) values
+('b2516679-0e54-4390-b877-198a1678c09a','lisi','{bcrypt}$2y$10$X/l.uHOi36hnQiRM0xzfT.lbsu1untgBtXg3CAsMlhcGZtfetpnru');
 ```
 
 ## 2. 角色表`auth_role`

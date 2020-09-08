@@ -14,18 +14,17 @@ Spring Security 5 示例。
 ## 1. 账号密码
 - RESTful 登录、注销、未登录、未授权
 - 用户数据在MySQL
+
+## 2. 授权
 - 授权数据在MySQL，并缓存在JVM或（和）Redis
 - ANT风格URI授权
 - RBAC0
-- 会话保持
-  + Servlet Session  
-  使用Spring Session Data Redis实现分布式session
-  + Token header  
-  自定义生成、存储、有效期、header名称
 
-## 2. OAuth2
-### 2.1 Opaque Token
-- 自定义生成、存储、有效期
+## 3. 会话保持
+- Servlet Session  
+  使用Spring Session Data Redis实现分布式session
+- Token header  
+  自定义生成、存储、有效期、header名称
 
 # 子项目说明
 **所有项目运行于Servlet而不是WebFlux环境。**
@@ -88,6 +87,3 @@ Spring Security 5 示例。
   + 增加角色
   + 在Java方法上授权
  
-## 认证+授权+OAuth2
-
-## OAuth2授权服务器

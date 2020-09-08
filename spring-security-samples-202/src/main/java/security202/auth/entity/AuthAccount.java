@@ -23,14 +23,4 @@ public class AuthAccount {
 	 */
 	private String password;
 
-	/**
-	 * 是否启用
-	 */
-	private boolean enabled = true;
-
-	/**
-	 * 是否已删除
-	 */
-	private boolean deleted;
-
 }

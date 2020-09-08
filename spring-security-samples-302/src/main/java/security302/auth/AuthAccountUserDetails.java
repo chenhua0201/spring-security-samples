@@ -34,13 +34,12 @@ public class AuthAccountUserDetails implements UserDetails {
 	private final String username;
 
 	public AuthAccountUserDetails(AuthAccount account) {
-		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, account.isEnabled(),
+		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, true,
 				Collections.emptySet());
 	}
 
 	public AuthAccountUserDetails(AuthAccount account, Set<GrantedAuthority> authorities) {
-		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, account.isEnabled(),
-				authorities);
+		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, true, authorities);
 	}
 
 	public AuthAccountUserDetails(String id, String username, String password) {
