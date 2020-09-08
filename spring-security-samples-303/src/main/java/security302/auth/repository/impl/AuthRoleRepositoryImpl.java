@@ -1,4 +1,4 @@
-package security301.auth.repository.impl;
+package security302.auth.repository.impl;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import security301.auth.entity.AuthRole;
-import security301.auth.repository.AuthRoleRepository;
+import security302.auth.entity.AuthRole;
+import security302.auth.repository.AuthRoleRepository;
 
 /**
  * 角色仓库实现。
@@ -24,8 +24,7 @@ public class AuthRoleRepositoryImpl implements AuthRoleRepository {
 		final AuthRole role = new AuthRole();
 		role.setId(rs.getString(index++));
 		role.setName(rs.getString(index++));
-		role.setIdentifier(rs.getString(index++));
-		role.setSuperRole(rs.getBoolean(index++));
+		role.setDescription(rs.getString(index++));
 
 		return role;
 	};
@@ -39,7 +38,7 @@ public class AuthRoleRepositoryImpl implements AuthRoleRepository {
 
 	@Override
 	public List<AuthRole> findByAccountId(String accountId) {
-		final String sql = "SELECT r.id, r.name, r.identifier, r.super_role FROM auth_role AS r INNER JOIN auth_account_role AS j ON r.id = j.role_id WHERE j.account_id = ?";
+		final String sql = "SELECT r.id, r.name, r.description FROM auth_role AS r INNER JOIN auth_account_role AS j ON r.id = j.role_id WHERE j.account_id = ?";
 
 		return jdbcTemplate.query(sql, new Object[] { accountId }, authRoleMapper);
 	}

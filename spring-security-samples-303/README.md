@@ -1,17 +1,18 @@
-# spring-security-samples-301
+# spring-security-samples-303
 使用Token保持会话。  
 客户端通过HTTP header传递token。  
 自定义`UserDetailsService`，从MySQL读取用户数据。  
 RESTful请求和响应。  
-增加角色。
-在配置里对URI授权。
+增加角色。  
+增加权限。  
+动态对URL进行授权，授权数据存在MySQL。
 
 # 1. 会话
 ## 1.1 禁用session
 
 ## 1.2 使用Token保持会话
-  - 自定义生成规则。本例用UUID，见`security301.auth.token.TokenGeneratorUuid`
-  - 自定义header名称、header值前缀、token有效期、token在redis的key前缀， 见`security301.auth.token.TokenProperties`
+  - 自定义生成规则。本例用UUID，见`security303.auth.token.TokenGeneratorUuid`
+  - 自定义header名称、header值前缀、token有效期、token在redis的key前缀， 见`security303.auth.token.TokenProperties`
   - 自定义存储。本例用redis
   - `RedisTemplate`的值序列化改为JSON
 
@@ -60,12 +61,15 @@ RESTful请求和响应。
   - `UserDetails`的`getAuthorities()`代表角色
   - 角色是字符串
 
-## 4.2 设置静态角色
-  - `AuthAccountUserDetailsServiceImpl`加载 `UserDetails`时，从MySQL的`auth_role`表读取角色
+## 4.2 授权时动态加载角色
+  - TODO
 
 # 5. 授权
-  - 在`HttpSecurity`设置URI所需的角色
-
+  - 权限是：URL + HTTP method
+    + HTTP method：逗号分隔，不区分大小写，*表示全部
+    + 所有URL均要求
+  - 角色关联权限
+  
 ## 5.1 现象
   - zhangsan有角色ADMIN，所以有权访问`/hello`；而lisi无权访问，返回状态码403
   - zhangsan和lisi都有权访问`/index`接口
@@ -79,7 +83,7 @@ CREATE TABLE `auth_account` (
   `password` varchar(80) NOT NULL COMMENT '登录密码',
   PRIMARY KEY (`id`),
   UNIQUE KEY `udx_username` (`username`)
-) COMMENT='账号';
+) COMMENT='账号'
 ```
 
 ### 1.1 初始化账号数据
@@ -98,18 +102,17 @@ insert  into `auth_account`(`id`,`username`,`password`) values
 CREATE TABLE `auth_role` (
   `id` varchar(36) NOT NULL COMMENT 'ID',
   `name` varchar(50) NOT NULL COMMENT '名称',
-  `identifier` varchar(50) NOT NULL COMMENT '标识',
-  `super_role` tinyint NOT NULL DEFAULT '0' COMMENT '是否是超级用户',
-  `description` varchar(100) NULL DEFAULT '' COMMENT '描述',
+  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '描述',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `udx_identifier` (`identifier`)
+  UNIQUE KEY `udx_name` (`name`)
 ) COMMENT='角色';
 
 ```
 
 ### 2.1 初始化角色数据
 ```
-insert  into `auth_role`(`id`,`name`,`identifier`,`super_role`) values ('5558ab2d-4c61-4a18-a71c-ad73c48bb8cf','管理员','ROLE_ADMIN',1);
+-- 角色名：ROLE_ADMIN
+insert  into `auth_role`(`id`,`name`,`description`) values ('5558ab2d-4c61-4a18-a71c-ad73c48bb8cf','ROLE_ADMIN','管理员');
 ```
 
 ## 3. 账号与角色关联表
@@ -126,7 +129,28 @@ CREATE TABLE `auth_account_role` (
 
 ### 3.1 初始化账号与角色关联数据
 ```
---  zhangsan角色是“管理员”
-insert  into `auth_account_role`(`id`,`account_id`,`role_id`) values ('2cdd1d1b-6b2c-4fc9-bfb3-e65ffa12ca69','4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','5558ab2d-4c61-4a18-a71c-ad73c48bb8cf');
-
+--  zhangsan有ADMIN角色；lisi没有任何角色
+insert  into `auth_account_role`(`id`,`account_id`,`role_id`) values 
+('2cdd1d1b-6b2c-4fc9-bfb3-e65ffa12ca69','4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','5558ab2d-4c61-4a18-a71c-ad73c48bb8cf');
 ```
+
+## 4. 权限表
+CREATE TABLE `auth_permission` (
+  `id` varchar(36) NOT NULL COMMENT 'ID',
+  `name` varchar(50) NOT NULL COMMENT '名称',
+  `url` varchar(50) NOT NULL COMMENT 'ANT风格URL',
+  `method` varchar(50) NOT NULL COMMENT 'HTTP方法，逗号分隔，不区分大小写。*表示全部',
+  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '描述',
+  `sort` int unsigned NOT NULL DEFAULT '0' COMMENT '排序，升序',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `udx_name` (`name`)
+) COMMENT='权限';
+
+## 5. 角色与权限的关联表
+CREATE TABLE `auth_role_permission` (
+  `id` varchar(36) NOT NULL COMMENT 'ID',
+  `role_id` varchar(36) NOT NULL COMMENT '角色ID，关联auth_role表',
+  `permission_id` varchar(36) NOT NULL COMMENT '权限ID，关联auth_permission表',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `udx_role_permission` (`role_id`,`permission_id`)
+) COMMENT='角色与权限的关联';

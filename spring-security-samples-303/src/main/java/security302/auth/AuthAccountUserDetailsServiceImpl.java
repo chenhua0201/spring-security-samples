@@ -1,4 +1,4 @@
-package security301.auth;
+package security302.auth;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -13,10 +13,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import security301.auth.entity.AuthAccount;
-import security301.auth.entity.AuthRole;
-import security301.auth.repository.AuthAccountRepository;
-import security301.auth.repository.AuthRoleRepository;
+import security302.auth.entity.AuthAccount;
+import security302.auth.entity.AuthRole;
+import security302.auth.repository.AuthAccountRepository;
+import security302.auth.repository.AuthRoleRepository;
 
 /**
  * 实现Spring Security的{@link UserDetailsService}。
@@ -52,10 +52,9 @@ public class AuthAccountUserDetailsServiceImpl implements UserDetailsService {
 		// 角色的名称作为GrantedAuthority
 		final Set<GrantedAuthority> grantedAuthorities = authRoleRepository.findByAccountId(account.getId())
 				.stream()
-				.map(AuthRole::getIdentifier)
+				.map(AuthRole::getName)
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toSet());
-		System.err.println(grantedAuthorities);
 
 		return new AuthAccountUserDetails(account, grantedAuthorities);
 	}

@@ -1,4 +1,4 @@
-package security301.auth.entity;
+package security302.auth.entity;
 
 import lombok.Data;
 
@@ -19,13 +19,8 @@ public class AuthRole {
 	private String name;
 
 	/**
-	 * 标识
+	 * 描述
 	 */
-	private String identifier;
-
-	/**
-	 * 是否是超级用户
-	 */
-	private boolean superRole;
+	private String description = "";
 
 }

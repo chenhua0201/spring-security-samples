@@ -29,7 +29,7 @@ Spring Security 5 示例。
 # 子项目说明
 **所有项目运行于Servlet而不是WebFlux环境。**
 
-## 认证
+## 认证，无数据库
 - 101
   + 完全使用默认配置
 
@@ -53,6 +53,7 @@ Spring Security 5 示例。
   + 使用Spring Session Redis实现分布式session
   + 客户端通过HTTP header传递session id
 
+## 认证，数据源是MySQL
 - 201
   + 使用Spring Session Redis实现分布式session
   + 客户端通过HTTP header传递session id

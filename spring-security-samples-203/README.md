@@ -62,7 +62,7 @@ CREATE TABLE `auth_account` (
   `password` varchar(80) NOT NULL COMMENT '登录密码',
   PRIMARY KEY (`id`),
   UNIQUE KEY `udx_username` (`username`)
-) COMMENT='账号'
+) COMMENT='账号';
 ```
 
 ### 1.1 初始化账号数据
