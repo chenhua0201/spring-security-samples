@@ -99,17 +99,17 @@ insert  into `auth_account`(`id`,`username`,`password`) values
 CREATE TABLE `auth_role` (
   `id` varchar(36) NOT NULL COMMENT 'ID',
   `name` varchar(50) NOT NULL COMMENT '名称',
-  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '描述',
+  `identifier` varchar(50) NOT NULL COMMENT '标识',
+  `super_role` tinyint NOT NULL DEFAULT '0' COMMENT '是否是超级用户',
+  `description` varchar(100) NULL DEFAULT '' COMMENT '描述',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `udx_name` (`name`)
+  UNIQUE KEY `udx_identifier` (`identifier`)
 ) COMMENT='角色';
-
 ```
 
 ### 2.1 初始化角色数据
 ```
--- 角色名：ROLE_ADMIN
-insert  into `auth_role`(`id`,`name`,`description`) values ('5558ab2d-4c61-4a18-a71c-ad73c48bb8cf','ROLE_ADMIN','管理员');
+insert  into `auth_role`(`id`,`name`,`identifier`,`super_role`) values ('5558ab2d-4c61-4a18-a71c-ad73c48bb8cf','管理员','ROLE_ADMIN',1);
 ```
 
 ## 3. 账号与角色关联表
@@ -127,6 +127,5 @@ CREATE TABLE `auth_account_role` (
 ### 3.1 初始化账号与角色关联数据
 ```
 --  zhangsan有ADMIN角色；lisi没有任何角色
-insert  into `auth_account_role`(`id`,`account_id`,`role_id`) values 
-('2cdd1d1b-6b2c-4fc9-bfb3-e65ffa12ca69','4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','5558ab2d-4c61-4a18-a71c-ad73c48bb8cf');
+insert  into `auth_account_role`(`id`,`account_id`,`role_id`) values ('2cdd1d1b-6b2c-4fc9-bfb3-e65ffa12ca69','4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','5558ab2d-4c61-4a18-a71c-ad73c48bb8cf');
 ```

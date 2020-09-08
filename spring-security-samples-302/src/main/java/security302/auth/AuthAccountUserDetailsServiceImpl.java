@@ -52,7 +52,7 @@ public class AuthAccountUserDetailsServiceImpl implements UserDetailsService {
 		// 角色的名称作为GrantedAuthority
 		final Set<GrantedAuthority> grantedAuthorities = authRoleRepository.findByAccountId(account.getId())
 				.stream()
-				.map(AuthRole::getName)
+				.map(AuthRole::getIdentifier)
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toSet());
 

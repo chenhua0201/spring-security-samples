@@ -19,8 +19,13 @@ public class AuthRole {
 	private String name;
 
 	/**
-	 * 描述
+	 * 标识
 	 */
-	private String description = "";
+	private String identifier;
+
+	/**
+	 * 是否是超级用户
+	 */
+	private boolean superRole;
 
 }

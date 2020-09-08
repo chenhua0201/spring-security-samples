@@ -55,7 +55,6 @@ public class AuthAccountUserDetailsServiceImpl implements UserDetailsService {
 				.map(AuthRole::getIdentifier)
 				.map(SimpleGrantedAuthority::new)
 				.collect(Collectors.toSet());
-		System.err.println(grantedAuthorities);
 
 		return new AuthAccountUserDetails(account, grantedAuthorities);
 	}

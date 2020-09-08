@@ -24,7 +24,8 @@ public class AuthRoleRepositoryImpl implements AuthRoleRepository {
 		final AuthRole role = new AuthRole();
 		role.setId(rs.getString(index++));
 		role.setName(rs.getString(index++));
-		role.setDescription(rs.getString(index++));
+		role.setIdentifier(rs.getString(index++));
+		role.setSuperRole(rs.getBoolean(index++));
 
 		return role;
 	};
@@ -38,7 +39,7 @@ public class AuthRoleRepositoryImpl implements AuthRoleRepository {
 
 	@Override
 	public List<AuthRole> findByAccountId(String accountId) {
-		final String sql = "SELECT r.id, r.name, r.description FROM auth_role AS r INNER JOIN auth_account_role AS j ON r.id = j.role_id WHERE j.account_id = ?";
+		final String sql = "SELECT r.id, r.name, r.identifier, r.super_role FROM auth_role AS r INNER JOIN auth_account_role AS j ON r.id = j.role_id WHERE j.account_id = ?";
 
 		return jdbcTemplate.query(sql, new Object[] { accountId }, authRoleMapper);
 	}
