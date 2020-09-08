@@ -10,8 +10,8 @@ RESTful请求和响应。
 ## 1.1 禁用session
 
 ## 1.2 使用Token保持会话
-  - 自定义生成规则。本例用UUID，见`security203.auth.token.TokenGeneratorUuid`
-  - 自定义header名称、header值前缀、token有效期、token在redis的key前缀， 见`security203.auth.token.TokenProperties`
+  - 自定义生成规则。本例用UUID，见`security301.auth.token.TokenGeneratorUuid`
+  - 自定义header名称、header值前缀、token有效期、token在redis的key前缀， 见`security301.auth.token.TokenProperties`
   - 自定义存储。本例用redis
   - `RedisTemplate`的值序列化改为JSON
 
