@@ -88,3 +88,11 @@ Spring Security 5 示例。
   + 增加角色
   + 在Java方法上授权
  
+- 303
+  + 使用Token保持会话
+  + 客户端通过HTTP header传递token
+  + 自定义`UserDetailsService`，从MySQL读取用户数据
+  + RESTful请求和响应
+  + 增加角色
+  + 增加权限 
+  + 动态对URL进行授权，授权数据存在MySQL。
