@@ -64,13 +64,13 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 				.map(AuthPermission::getId)
 				.collect(Collectors.toSet());
 		if (urlPermissionIds == null || urlPermissionIds.isEmpty()) {
-			return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
+			return handleAbsentUrl();
 		}
 
 		// 权限对应的角色
 		final List<AuthRole> roles = authRoleRepository.findByPermissionIds(urlPermissionIds);
 		if (roles == null || roles.isEmpty()) {
-			return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
+			return handleAbsentUrl();
 		}
 
 		// 角色标识集合列表
@@ -78,10 +78,16 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 				.map(AuthRole::getIdentifier)
 				.collect(Collectors.toSet())
 				.toArray(new String[0]);
-		if (attrs.length == 0) {
-			return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
-		}
-		return SecurityConfig.createList(attrs);
+		return attrs.length == 0 ? handleAbsentUrl() : SecurityConfig.createList(attrs);
+	}
+
+	/**
+	 * 处理未关联角色的URL。
+	 *
+	 * @return 未关联角色的Attributes
+	 */
+	private Collection<ConfigAttribute> handleAbsentUrl() {
+		return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
 	}
 
 	private boolean isUrlAllowed(AuthPermission permission, FilterInvocation filterInvocation) {
