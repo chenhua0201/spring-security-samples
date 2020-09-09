@@ -39,7 +39,7 @@ public class AuthPermissionRepositoryImpl implements AuthPermissionRepository {
 
 	@Override
 	public List<AuthPermission> findAll() {
-		final String sql = "SELECT id, name, url, method FROM auth_permission";
+		final String sql = "SELECT id,name,url,method FROM auth_permission";
 
 		return jdbcTemplate.query(sql, authPermissionMapper);
 	}

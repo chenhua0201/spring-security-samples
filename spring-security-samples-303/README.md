@@ -70,7 +70,7 @@ RESTful请求和响应。
   
 ## 5.1 现象
   - zhangsan有超级角色ROLE_ADMIN，允许所有URL
-  - lisi有角色ROLE_STUDENT，允许访问`/hello`，无权访问`/`
+  - lisi有角色ROLE_STUDENT，允许访问首页`/`，无权访问`/hello`
 
 # 数据库
 ## 1. 账号表`auth_account`

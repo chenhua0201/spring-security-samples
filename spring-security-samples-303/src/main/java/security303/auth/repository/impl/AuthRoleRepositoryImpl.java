@@ -46,7 +46,7 @@ public class AuthRoleRepositoryImpl implements AuthRoleRepository {
 
 	@Override
 	public List<AuthRole> findByAccountId(String accountId) {
-		final String sql = "SELECT r.id, r.name, r.identifier, r.super_role FROM auth_role AS r INNER JOIN auth_account_role AS j ON r.id = j.role_id WHERE j.account_id = ?";
+		final String sql = "SELECT r.id,r.name,r.identifier,r.super_role FROM auth_role AS r INNER JOIN auth_account_role AS j ON r.id=j.role_id WHERE j.account_id=?";
 
 		return jdbcTemplate.query(sql, new Object[] { accountId }, authRoleMapper);
 	}
@@ -60,5 +60,12 @@ public class AuthRoleRepositoryImpl implements AuthRoleRepository {
 		paramMap.put("permissionIds", permissionIds);
 
 		return namedParameterJdbcTemplate.query(sql, paramMap, authRoleMapper);
+	}
+
+	@Override
+	public List<AuthRole> findSuper() {
+		final String sql = "SELECT id,name,identifier,super_role FROM auth_role WHERE super_role=true";
+
+		return jdbcTemplate.query(sql, authRoleMapper);
 	}
 }

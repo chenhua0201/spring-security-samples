@@ -25,4 +25,11 @@ public interface AuthRoleRepository {
 	 * @return 权限所属的角色列表
 	 */
 	List<AuthRole> findByPermissionIds(Collection<String> permissionIds);
+
+	/**
+	 * 查询超级角色列表。
+	 *
+	 * @return 超级角色列表
+	 */
+	List<AuthRole> findSuper();
 }
