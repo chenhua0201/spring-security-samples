@@ -11,7 +11,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -47,13 +46,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// 认证过滤器
-		final LoginFormAuthenticationFilter filter = new LoginFormAuthenticationFilter(objectMapper);
-		filter.setAuthenticationSuccessHandler(restAuthenticationSuccessHandler);
-		filter.setAuthenticationFailureHandler(restAuthenticationFailureHandler);
-		filter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/login", "POST"));
-		filter.setPostOnly(true);
-		filter.setAuthenticationManager(authenticationManagerBean());
 
 		http.csrf()
 				.disable()// 关闭csrf，避免postman之类的客户端无法获得csrf token
@@ -73,6 +65,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 				.addLogoutHandler(tokenLogoutHandler)
 				.logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
+
+		// 认证过滤器
+		final LoginFormAuthenticationFilter filter = new LoginFormAuthenticationFilter(objectMapper);
+		filter.setAuthenticationSuccessHandler(restAuthenticationSuccessHandler);
+		filter.setAuthenticationFailureHandler(restAuthenticationFailureHandler);
+		filter.setAuthenticationManager(authenticationManagerBean());
 
 		// 用重写的Filter替换掉原有的UsernamePasswordAuthenticationFilter
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

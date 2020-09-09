@@ -57,22 +57,20 @@ RESTful请求和响应。
   - 见`restful.RestAccessDeniedHandler`，返回状态码403
 
 # 4. 角色
-## 4.1 Authority
   - `UserDetails`的`getAuthorities()`代表角色
-  - 角色是字符串
-
-## 4.2 授权时动态加载角色
-  - TODO
+  - 角色是字符串，即AuthRole的identifier
+  - 超级角色
 
 # 5. 授权
   - 权限是：URL + HTTP method
-    + HTTP method：逗号分隔，不区分大小写，*表示全部
+    + HTTP method：逗号分隔，不区分大小写，`*`表示全部
     + 所有URL均要求
   - 角色关联权限
+  - 超级角色允许访问所有URL
   
 ## 5.1 现象
-  - zhangsan有角色ADMIN，所以有权访问`/hello`；而lisi无权访问，返回状态码403
-  - zhangsan和lisi都有权访问`/index`接口
+  - zhangsan有超级角色ROLE_ADMIN，允许所有URL
+  - lisi有角色ROLE_STUDENT，允许访问`/hello`，无权访问`/`
 
 # 数据库
 ## 1. 账号表`auth_account`
@@ -102,17 +100,19 @@ insert  into `auth_account`(`id`,`username`,`password`) values
 CREATE TABLE `auth_role` (
   `id` varchar(36) NOT NULL COMMENT 'ID',
   `name` varchar(50) NOT NULL COMMENT '名称',
-  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '描述',
+  `identifier` varchar(50) NOT NULL COMMENT '标识',
+  `super_role` tinyint NOT NULL DEFAULT '0' COMMENT '是否是超级用户',
+  `description` varchar(100) NULL DEFAULT '' COMMENT '描述',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `udx_name` (`name`)
+  UNIQUE KEY `udx_identifier` (`identifier`)
 ) COMMENT='角色';
 
 ```
 
 ### 2.1 初始化角色数据
 ```
--- 角色名：ROLE_ADMIN
-insert  into `auth_role`(`id`,`name`,`description`) values ('5558ab2d-4c61-4a18-a71c-ad73c48bb8cf','ROLE_ADMIN','管理员');
+insert  into `auth_role`(`id`,`name`,`identifier`,`super_role`) values ('5558ab2d-4c61-4a18-a71c-ad73c48bb8cf','管理员','ROLE_ADMIN',1);
+insert  into `auth_role`(`id`,`name`,`identifier`,`super_role`) values ('22d0295a-49b4-40f5-8f09-8d52ab5c40de','学生','ROLE_STUDENT',0);
 ```
 
 ## 3. 账号与角色关联表
@@ -129,9 +129,11 @@ CREATE TABLE `auth_account_role` (
 
 ### 3.1 初始化账号与角色关联数据
 ```
---  zhangsan有ADMIN角色；lisi没有任何角色
-insert  into `auth_account_role`(`id`,`account_id`,`role_id`) values 
-('2cdd1d1b-6b2c-4fc9-bfb3-e65ffa12ca69','4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','5558ab2d-4c61-4a18-a71c-ad73c48bb8cf');
+-- zhangsan角色是管理员
+insert  into `auth_account_role`(`id`,`account_id`,`role_id`) values ('2cdd1d1b-6b2c-4fc9-bfb3-e65ffa12ca69','4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38','5558ab2d-4c61-4a18-a71c-ad73c48bb8cf');
+
+-- lisi角色是学生
+insert  into `auth_account_role`(`id`,`account_id`,`role_id`) values ('d8468b96-c1c1-4a03-acd6-27337d888887','b2516679-0e54-4390-b877-198a1678c09a','22d0295a-49b4-40f5-8f09-8d52ab5c40de');
 ```
 
 ## 4. 权限表
@@ -140,11 +142,16 @@ CREATE TABLE `auth_permission` (
   `name` varchar(50) NOT NULL COMMENT '名称',
   `url` varchar(50) NOT NULL COMMENT 'ANT风格URL',
   `method` varchar(50) NOT NULL COMMENT 'HTTP方法，逗号分隔，不区分大小写。*表示全部',
-  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '描述',
-  `sort` int unsigned NOT NULL DEFAULT '0' COMMENT '排序，升序',
   PRIMARY KEY (`id`),
   UNIQUE KEY `udx_name` (`name`)
 ) COMMENT='权限';
+
+### 4.1 初始化权限数据
+```
+insert  into `auth_permission`(`id`,`name`,`url`,`method`) values ('66d7652a-1fe0-40e6-86d8-a0b0997e4fb3','hello','/hello/*','GET');
+insert  into `auth_permission`(`id`,`name`,`url`,`method`) values ('f53d561e-409d-4907-a955-97de66fe674a','首页','/','GET');
+```
+
 
 ## 5. 角色与权限的关联表
 CREATE TABLE `auth_role_permission` (
@@ -154,3 +161,9 @@ CREATE TABLE `auth_role_permission` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `udx_role_permission` (`role_id`,`permission_id`)
 ) COMMENT='角色与权限的关联';
+
+### 5.1 初始化角色与权限关联数据
+```
+-- 学生角色允许访问首页
+insert  into `auth_role_permission`(`id`,`role_id`,`permission_id`) values ('677c1e0d-80f4-489a-b4c1-fa7d7ef56b3d','22d0295a-49b4-40f5-8f09-8d52ab5c40de','f53d561e-409d-4907-a955-97de66fe674a');
+```

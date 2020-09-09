@@ -17,6 +17,7 @@ import org.springframework.util.Assert;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
+import security301.config.AuthUrlConstants;
 
 /**
  * 从JSON里提取username和password。
@@ -37,7 +38,7 @@ public class LoginFormAuthenticationFilter extends AbstractAuthenticationProcess
 	private boolean postOnly = true;
 
 	public LoginFormAuthenticationFilter(ObjectMapper objectMapper) {
-		super(new AntPathRequestMatcher("/login", "POST"));
+		super(new AntPathRequestMatcher(AuthUrlConstants.LOGIN, "POST"));
 		this.objectMapper = objectMapper;
 	}
 

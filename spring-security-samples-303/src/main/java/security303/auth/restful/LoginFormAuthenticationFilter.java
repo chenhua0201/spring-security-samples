@@ -1,4 +1,4 @@
-package security302.auth.restful;
+package security303.auth.restful;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +17,7 @@ import org.springframework.util.Assert;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.slf4j.Slf4j;
-import security302.config.AuthUrlConstants;
+import security303.config.AuthUrlConstants;
 
 /**
  * 从JSON里提取username和password。
