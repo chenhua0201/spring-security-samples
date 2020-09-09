@@ -1,9 +1,11 @@
 package security303.authz;
 
+import java.time.Instant;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -40,6 +42,9 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 	@Autowired
 	private AuthRoleRepository authRoleRepository;
 
+	@Autowired
+	private AuthzProperties authzProperties;
+
 	@Override
 	public Collection<ConfigAttribute> getAllConfigAttributes() {
 		return null;
@@ -48,7 +53,7 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 	/**
 	 * {@inheritDoc}
 	 * <p/>
-	 * 查询URL关联了哪些角色。
+	 * 查询URL关联了哪些角色。返回null或空集合表示该URL不需要授权。
 	 */
 	@Override
 	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
@@ -58,15 +63,14 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 				.filter(permission -> isUrlAllowed(permission, (FilterInvocation) object))
 				.map(AuthPermission::getId)
 				.collect(Collectors.toSet());
-
 		if (urlPermissionIds == null || urlPermissionIds.isEmpty()) {
-			return Collections.emptySet();
+			return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
 		}
 
 		// 权限对应的角色
 		final List<AuthRole> roles = authRoleRepository.findByPermissionIds(urlPermissionIds);
 		if (roles == null || roles.isEmpty()) {
-			return Collections.emptySet();
+			return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
 		}
 
 		// 角色标识集合列表
@@ -74,6 +78,9 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 				.map(AuthRole::getIdentifier)
 				.collect(Collectors.toSet())
 				.toArray(new String[0]);
+		if (attrs.length == 0) {
+			return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
+		}
 		return SecurityConfig.createList(attrs);
 	}
 
@@ -101,6 +108,18 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 		}
 
 		return false;
+	}
+
+	/**
+	 * 随机角色标识，用于避免返回空集合。
+	 *
+	 * @return 随机角色
+	 */
+	private Collection<ConfigAttribute> randomAttributes() {
+		return SecurityConfig.createList("ROLE_" + UUID.randomUUID()
+				.toString()
+				+ Instant.now()
+						.toEpochMilli());
 	}
 
 	@Override
