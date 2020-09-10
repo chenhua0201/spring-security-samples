@@ -3,7 +3,7 @@
 客户端通过HTTP header传递token。  
 自定义`UserDetailsService`，从MySQL读取用户数据。  
 RESTful请求和响应。  
-增加角色。
+角色。
 在配置里对URI授权。
 
 # 1. 会话

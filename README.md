@@ -77,7 +77,7 @@ Spring Security 5 示例。
   + 客户端通过HTTP header传递token
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
-  + 增加角色
+  + 角色
   + 在配置里对URI授权
 
 - 302
@@ -85,7 +85,7 @@ Spring Security 5 示例。
   + 客户端通过HTTP header传递token
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
-  + 增加角色
+  + 角色
   + 在Java方法上授权
  
 - 303
@@ -93,7 +93,7 @@ Spring Security 5 示例。
   + 客户端通过HTTP header传递token
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
-  + 增加角色
-  + 增加权限 
+  + 角色
+  + 权限 
   + 动态对URL进行授权，授权数据存在MySQL
   + Caffeine缓存授权数据，并订阅redis消息，实现缓存刷新。方法：127.0.0.1:6379> publish authz:refresh 1
