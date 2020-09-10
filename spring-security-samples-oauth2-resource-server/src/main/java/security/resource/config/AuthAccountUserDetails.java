@@ -1,4 +1,4 @@
-package security.server.authz.auth;
+package security.resource.config;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -6,8 +6,6 @@ import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import security.server.authz.auth.entity.AuthAccount;
 
 /**
  * 账号实现的{@link UserDetails}。
@@ -32,15 +30,6 @@ public class AuthAccountUserDetails implements UserDetails {
 	private final String password;
 
 	private final String username;
-
-	public AuthAccountUserDetails(AuthAccount account) {
-		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, true,
-				Collections.emptySet());
-	}
-
-	public AuthAccountUserDetails(AuthAccount account, Set<GrantedAuthority> authorities) {
-		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, true, authorities);
-	}
 
 	public AuthAccountUserDetails(String id, String username, String password) {
 		this(id, username, password, true, true, true, true, Collections.emptySet());

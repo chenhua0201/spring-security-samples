@@ -1,5 +1,5 @@
 # spring-security-samples-oauth2-authz-server
-OAuth2授权服务器。
+OAuth2授权服务器，基于已废弃的spring-security-oauth2-autoconfigure。
 自定义`UserDetailsService`，从MySQL读取用户数据。  
 
 # 1. 账号
