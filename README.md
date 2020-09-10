@@ -95,4 +95,5 @@ Spring Security 5 示例。
   + RESTful请求和响应
   + 增加角色
   + 增加权限 
-  + 动态对URL进行授权，授权数据存在MySQL。
+  + 动态对URL进行授权，授权数据存在MySQL
+  + Caffeine缓存授权数据，并订阅redis消息，实现缓存刷新。方法：127.0.0.1:6379> publish authz:refresh 1
