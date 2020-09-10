@@ -23,15 +23,15 @@ RESTful请求和响应。
 ## 1.4 关闭csrf
   - 关闭csrf，因为postman之类的客户端无法获得csrf token而导致没有权限访问接口
 
-# 2. 用户
-## 2.1 用户在MySQL
-  - 创建用户`AuthAccount`
+# 2. 账号
+## 2.1 账号在MySQL
+  - 见`AuthAccount`
 
 ## 2.2 自定义`UserDetails`
-  - 创建`AuthAccountUserDetails`
+  - 见`AuthAccountUserDetails`
 
 ## 2.3 自定义`UserDetailsService`
-  - 创建`AuthAccountUserDetailsServiceImpl`
+  - 见`AuthAccountUserDetailsServiceImpl`
 
 # 3. RESTful
 ## 3.1 登录请求

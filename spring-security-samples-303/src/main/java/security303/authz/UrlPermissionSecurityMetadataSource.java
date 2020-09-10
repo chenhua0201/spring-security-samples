@@ -82,9 +82,9 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 	}
 
 	/**
-	 * 处理未关联角色的URL。
+	 * 处理未关联权限的URL。
 	 *
-	 * @return 未关联角色的Attributes
+	 * @return 未关联权限的Attributes
 	 */
 	private Collection<ConfigAttribute> handleAbsentUrl() {
 		return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
