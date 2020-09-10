@@ -25,16 +25,11 @@ import security303.auth.repository.AuthRoleRepository;
 @Slf4j
 public class AuthAccountUserDetailsServiceImpl implements UserDetailsService {
 
-	private final AuthAccountRepository authAccountRepository;
-
-	private final AuthRoleRepository authRoleRepository;
+	@Autowired
+	private AuthAccountRepository authAccountRepository;
 
 	@Autowired
-	public AuthAccountUserDetailsServiceImpl(AuthAccountRepository authAccountRepository,
-			AuthRoleRepository authRoleRepository) {
-		this.authAccountRepository = authAccountRepository;
-		this.authRoleRepository = authRoleRepository;
-	}
+	private AuthRoleRepository authRoleRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -49,7 +44,7 @@ public class AuthAccountUserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException("账号不存在：" + username);
 		}
 
-		// 角色的名称作为GrantedAuthority
+		// 角色的标识作为GrantedAuthority
 		final Set<GrantedAuthority> grantedAuthorities = authRoleRepository.findByAccountId(account.getId())
 				.stream()
 				.map(AuthRole::getIdentifier)

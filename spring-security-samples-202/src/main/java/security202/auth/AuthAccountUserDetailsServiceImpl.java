@@ -18,12 +18,8 @@ import security202.auth.repository.AuthAccountRepository;
 @Slf4j
 public class AuthAccountUserDetailsServiceImpl implements UserDetailsService {
 
-	private final AuthAccountRepository authAccountRepository;
-
 	@Autowired
-	public AuthAccountUserDetailsServiceImpl(AuthAccountRepository authAccountRepository) {
-		this.authAccountRepository = authAccountRepository;
-	}
+	private AuthAccountRepository authAccountRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
