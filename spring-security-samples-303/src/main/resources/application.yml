@@ -15,5 +15,3 @@ auth:
     timeout: 8h
     prefix: auth:token
     header: Authorization
-authz:
-  default-permit: false

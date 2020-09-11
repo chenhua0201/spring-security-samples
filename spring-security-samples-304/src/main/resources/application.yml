@@ -16,5 +16,4 @@ auth:
     prefix: auth:token
     header: Authorization
 authz:
-  default-permit: false
   cache-topic: authz:refresh

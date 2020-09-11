@@ -3,7 +3,6 @@ package security303.config;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.vote.AffirmativeBased;
@@ -25,7 +24,6 @@ import security303.auth.restful.RestAccessDeniedHandler;
 import security303.auth.restful.RestAuthenticationFailureHandler;
 import security303.auth.restful.RestAuthenticationSuccessHandler;
 import security303.auth.token.TokenAuthenticationFilter;
-import security303.authz.AuthzProperties;
 import security303.authz.UrlAccessDecisionVoter;
 import security303.authz.UrlPermissionSecurityMetadataSource;
 
@@ -33,7 +31,6 @@ import security303.authz.UrlPermissionSecurityMetadataSource;
  * Spring security配置。
  */
 @Configuration
-@EnableConfigurationProperties({ AuthzProperties.class })
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired

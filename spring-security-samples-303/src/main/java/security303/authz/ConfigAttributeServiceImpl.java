@@ -2,7 +2,6 @@ package security303.authz;
 
 import java.time.Instant;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -22,11 +21,11 @@ import security303.auth.repository.AuthPermissionRepository;
 import security303.auth.repository.AuthRoleRepository;
 
 /**
- * ConfigAttribute与FilterInvocation关联服务实现
+ * ConfigAttribute与FilterInvocation关联服务实现。
  * <p/>
  * 规则：
  * <ul>
- * <li>{@link AuthPermission}未定义的URL，按照security303.authz.AuthzProperties.defaultPermit决定是否保护；</li>
+ * <li>{@link AuthPermission}未定义的URL，拒绝访问；</li>
  * <li>超级角色可以访问所有URL。</li>
  * </ul>
  */
@@ -40,9 +39,6 @@ public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 
 	@Autowired
 	private AuthRoleRepository authRoleRepository;
-
-	@Autowired
-	private AuthzProperties authzProperties;
 
 	@Override
 	public Collection<ConfigAttribute> findByFilterInvocation(FilterInvocation filterInvocation) {
@@ -76,7 +72,7 @@ public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 	 * @return 未关联权限的Attributes
 	 */
 	private Collection<ConfigAttribute> handleAbsentUrl() {
-		return authzProperties.isDefaultPermit() ? Collections.emptySet() : randomAttributes();
+		return randomAttributes();
 	}
 
 	private boolean isUrlAllowed(AuthPermission permission, FilterInvocation filterInvocation) {
