@@ -17,8 +17,8 @@
         password: 87654321
 ```
 
-# 3. 设置密码编码器PasswordEncoder
-编辑application.yml，password改成经bcrypt编码后的字符串，再加上`DelegatingPasswordEncoder`定义的前缀，  
+# 3. 设置密码
+Spring security默认使用BCrypt对密码进行编码。
 ```
 spring:
   security:
