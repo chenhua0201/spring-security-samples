@@ -1,4 +1,4 @@
-package security304.authz;
+package security303.authz;
 
 import java.time.Instant;
 import java.util.Collection;
@@ -16,17 +16,17 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Service;
 import org.springframework.util.AntPathMatcher;
 
-import security304.auth.entity.AuthPermission;
-import security304.auth.entity.AuthRole;
-import security304.auth.repository.AuthPermissionRepository;
-import security304.auth.repository.AuthRoleRepository;
+import security303.auth.entity.AuthPermission;
+import security303.auth.entity.AuthRole;
+import security303.auth.repository.AuthPermissionRepository;
+import security303.auth.repository.AuthRoleRepository;
 
 /**
  * ConfigAttribute与FilterInvocation关联服务实现
  * <p/>
  * 规则：
  * <ul>
- * <li>{@link AuthPermission}未定义的URL，按照security304.authz.AuthzProperties.defaultPermit决定是否保护；</li>
+ * <li>{@link AuthPermission}未定义的URL，按照security303.authz.AuthzProperties.defaultPermit决定是否保护；</li>
  * <li>超级角色可以访问所有URL。</li>
  * </ul>
  */
