@@ -16,8 +16,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import security301.auth.AuthAccountUserDetails;
-
 /**
  * 认证token过滤器。
  */
@@ -50,11 +48,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 			if (tokenValue != null && SecurityContextHolder.getContext()
 					.getAuthentication() == null) {
 				// 设置UsernamePasswordAuthenticationToken
-				final AuthAccountUserDetails userDetails = new AuthAccountUserDetails(tokenValue.getAccountId(),
-						tokenValue.getUsername(), null/* password */);
-
 				final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-						userDetails, userDetails.getPassword(),
+						tokenValue.getUsername(), null/* password */,
 						grantedAuthorityConverter.decode(tokenValue.getAuthorities()));
 
 				authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

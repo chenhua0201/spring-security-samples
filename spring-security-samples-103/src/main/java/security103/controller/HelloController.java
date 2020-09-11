@@ -13,16 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
 	/**
-	 * 返回当前用户的principal，即
-	 * {@link org.springframework.security.core.userdetails.User}。
+	 * 返回当前用户的Authentication。
 	 *
-	 * @return 当前用户的principal
+	 * @return 当前用户的Authentication
 	 */
 	@GetMapping
-	public String hello() {
+	public Object hello() {
 		return SecurityContextHolder.getContext()
-				.getAuthentication()
-				.getPrincipal()
-				.toString();
+				.getAuthentication();
 	}
 }
