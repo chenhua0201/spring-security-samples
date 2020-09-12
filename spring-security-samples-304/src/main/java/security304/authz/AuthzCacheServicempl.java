@@ -3,7 +3,9 @@ package security304.authz;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,21 +14,17 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Service;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-
 import lombok.extern.slf4j.Slf4j;
-import security304.auth.entity.AuthPermission;
 import security304.auth.entity.AuthRole;
 import security304.auth.repository.AuthRoleRepository;
 import security304.authz.event.AuthzRefreshEvent;
 
 /**
- * 授权缓存服务Caffeine实现。
+ * 授权缓存服务实现。
  */
 @Service
 @Slf4j
-public class AuthzCacheServiceCaffeineImpl implements AuthzCacheService {
+public class AuthzCacheServicempl implements AuthzCacheService {
 
 	/**
 	 * 超级角色缓存key
@@ -42,37 +40,28 @@ public class AuthzCacheServiceCaffeineImpl implements AuthzCacheService {
 	/**
 	 * FilterInvocation关联的ConfigAttribute缓存
 	 */
-	private final Cache<FilterInvocationCacheKey, Collection<ConfigAttribute>> filterInvocationCache = Caffeine
-			.newBuilder()
-			.build();
+	private final Map<FilterInvocationCacheKey, Collection<ConfigAttribute>> filterInvocationCache = new ConcurrentHashMap<>();
 
 	/**
 	 * 超级角色缓存
 	 */
-	private final Cache<String, Set<String>> superRoleIdentifierCache = Caffeine.newBuilder()
-			.build();
+	private final Map<String, Set<String>> superRoleIdentifierCache = new ConcurrentHashMap<>();
 
 	@Override
 	public void clear() {
 		log.info("clear authz cache");
 
-		superRoleIdentifierCache.invalidateAll();
+		filterInvocationCache.clear();
 
-		filterInvocationCache.invalidateAll();
+		superRoleIdentifierCache.clear();
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * <p/>
-	 * 规则：
-	 * <ul>
-	 * <li>{@link AuthPermission}未定义的URL，不受保护；</li>
-	 * <li>超级角色可以访问所有URL。</li>
-	 * </ul>
 	 */
 	@Override
 	public Collection<ConfigAttribute> findByFilterInvocation(FilterInvocation filterInvocation) {
-		return filterInvocationCache.get(
+		return filterInvocationCache.computeIfAbsent(
 				new FilterInvocationCacheKey(filterInvocation.getRequestUrl(), filterInvocation.getHttpRequest()
 						.getMethod()),
 				filterInvocationCacheKey -> configAttributeService.findByFilterInvocation(filterInvocation));
@@ -80,7 +69,7 @@ public class AuthzCacheServiceCaffeineImpl implements AuthzCacheService {
 
 	@Override
 	public Set<String> findSuperRoleIdentifiers() {
-		return superRoleIdentifierCache.get(AUTHZ_SUPER_ROLE_IDENTIFIER, key -> {
+		return superRoleIdentifierCache.computeIfAbsent(AUTHZ_SUPER_ROLE_IDENTIFIER, key -> {
 			final List<AuthRole> superRoles = authRoleRepository.findSuper();
 			if (superRoles != null) {
 				return superRoles.parallelStream()
