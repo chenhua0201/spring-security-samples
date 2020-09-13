@@ -101,7 +101,7 @@ public class AuthAccountUserDetails implements UserDetails {
 	@Override
 	public String toString() {
 		final StringBuilder builder = new StringBuilder();
-		builder.append("AccountUserDetails [id=");
+		builder.append("AuthAccountUserDetails [id=");
 		builder.append(id);
 		builder.append(", username=");
 		builder.append(username);
