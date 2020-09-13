@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1/spring_security_samples?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+
+auth:
+  token:
+    timeout: 8h
+    prefix: auth:token
+    header: Authorization

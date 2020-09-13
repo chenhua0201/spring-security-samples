@@ -71,6 +71,12 @@ Spring Security 5 示例。
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
 
+- 204
+  + 使用Token保持会话。使用`AuthenticationProvider`实现。
+  + 客户端通过HTTP header传递token
+  + 自定义`UserDetailsService`，从MySQL读取用户数据
+  + RESTful请求和响应
+
 ## 认证+授权
 - 301
   + 使用Token保持会话
