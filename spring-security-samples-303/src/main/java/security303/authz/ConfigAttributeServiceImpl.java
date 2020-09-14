@@ -32,6 +32,14 @@ import security303.auth.repository.AuthRoleRepository;
 @Service
 public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 
+	/**
+	 * 随机角色标识，用于避免返回空集合
+	 */
+	private final Collection<ConfigAttribute> RANDOM = SecurityConfig.createList("ROLE_" + UUID.randomUUID()
+			.toString()
+			+ Instant.now()
+					.toEpochMilli());
+
 	private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
 	@Autowired
@@ -72,7 +80,7 @@ public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 	 * @return 未关联权限的Attributes
 	 */
 	private Collection<ConfigAttribute> handleAbsentUrl() {
-		return randomAttributes();
+		return RANDOM;
 	}
 
 	private boolean isUrlAllowed(AuthPermission permission, FilterInvocation filterInvocation) {
@@ -99,18 +107,6 @@ public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 		}
 
 		return false;
-	}
-
-	/**
-	 * 随机角色标识，用于避免返回空集合。
-	 *
-	 * @return 随机角色
-	 */
-	private Collection<ConfigAttribute> randomAttributes() {
-		return SecurityConfig.createList("ROLE_" + UUID.randomUUID()
-				.toString()
-				+ Instant.now()
-						.toEpochMilli());
 	}
 
 }
