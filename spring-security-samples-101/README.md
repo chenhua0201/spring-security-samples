@@ -8,7 +8,7 @@
   - 表单登录
     + 登录：`/login`
     + 注销：`/logout`
-  - 密码编解码器是默认的`BCryptPasswordEncoder`
+  - 无密码编解码器，相当于NoOpPasswordEncoder
   - 用cookie保持会话
 
 # 2. 现象
