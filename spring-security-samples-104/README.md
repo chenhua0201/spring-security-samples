@@ -1,5 +1,5 @@
 # spring-security-samples-104
-设置登录接口地址、注销接口地址。
+设置登录页面地址、注销页面地址。
 
 # 1. 设置登录页面地址
   - `/login`改为`/sys/signin`
