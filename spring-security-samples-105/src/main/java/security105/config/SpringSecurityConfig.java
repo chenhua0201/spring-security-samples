@@ -31,12 +31,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/")
-				.permitAll()// 不需要鉴权
-				.anyRequest()
-				.authenticated()// 所有其他请求都需要鉴权，会自动排除登录和注销接口
-				.and()
+		http.authorizeRequests(authorize -> authorize.mvcMatchers("/")// 不需要鉴权
+				.permitAll()
+				.anyRequest()// 所有其他请求都需要鉴权，会自动排除登录和注销接口
+				.authenticated())
 				.formLogin();
 	}
 
