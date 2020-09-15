@@ -31,20 +31,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		/**
-		 * 关闭csrf，否则请求登录时，必须在请求注销的表单里加上：
-		 *
-		 * <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		 */
-		http.csrf()
-				.disable()// 关闭csrf
-				.authorizeRequests()
+		// 本例并没有提供/sys/signin和/sys/signout页面，因此浏览器会显示404错误
+		http.authorizeRequests()
+				.antMatchers("/sys/signin", "/sys/signout")
+				.permitAll()
 				.anyRequest()
-				.authenticated()// 所有请求都需要鉴权，会自动排除登录和注销接口
+				.authenticated()// 所有请求都需要鉴权
 				.and()
 				.formLogin()
-				// 登录接口地址
-				.loginProcessingUrl("/sys/signin")
+				.loginPage("/sys/signin")
 				.and()
 				// 注销接口地址
 				.logout()
