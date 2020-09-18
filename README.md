@@ -2,7 +2,7 @@
 Spring Security 5 示例。
 
 # 软件版本
-- Spring Boot 2.3.3
+- Spring Boot 2.3.4
 - Spring Security 5.3.4
 - Spring Framework 5.2.8
 - JDK 8+
@@ -21,9 +21,9 @@ Spring Security 5 示例。
 - RBAC0
 
 ## 3. 会话保持
-- Servlet Session  
+- Servlet Session
   使用Spring Session Data Redis实现分布式session
-- Token header  
+- Token header
   自定义生成、存储、有效期、header名称
 
 # 子项目说明
@@ -93,14 +93,14 @@ Spring Security 5 示例。
   + RESTful请求和响应
   + 角色
   + 在Java方法上授权
- 
+
 - 303
   + 使用Token保持会话
   + 客户端通过HTTP header传递token
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
   + 角色
-  + 权限 
+  + 权限
   + 动态对URL进行授权，授权数据存在MySQL
   + 用ConcurrentHashMap缓存授权数据，并订阅redis消息，实现缓存刷新。发布刷新事件：`127.0.0.1:6379> publish authz:refresh 1`
 
