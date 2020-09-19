@@ -43,7 +43,7 @@ Spring Security 5 示例。
   + 设置登录页面地址、注销页面地址
 
 - 105
-  + 设置URI是否需要认证
+  + 设置URL是否需要认证
 
 - 106
   + 使用Spring Session Data Redis实现分布式session
