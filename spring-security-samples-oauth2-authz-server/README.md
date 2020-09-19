@@ -2,15 +2,15 @@
 OAuth2授权服务器，基于已废弃的spring-security-oauth2-autoconfigure。
 自定义`UserDetailsService`，从MySQL读取用户数据。  
 
-# 1. 账号
-## 1.1 账号在MySQL
-  - 见`AuthAccount`
+# 账号
+## 账号在MySQL
+- 见`AuthAccount`
 
-## 1.2 自定义`UserDetails`
-  - 见`AuthAccountUserDetails`
+## 自定义`UserDetails`
+- 见`AuthAccountUserDetails`
 
-## 1.3 自定义`UserDetailsService`
-  - 见`AuthAccountUserDetailsServiceImpl`
+## 自定义`UserDetailsService`
+- 见`AuthAccountUserDetailsServiceImpl`
 
 # Token操作
 ## 认证
@@ -76,7 +76,7 @@ curl -L -X POST 'http://localhost:8080/oauth/check_token?token=Ypi7GL0QtItqrVQaB
 ```
 
 # 数据库
-## 1. 账号表`auth_account`
+## 账号表`auth_account`
 ```
 CREATE TABLE `auth_account` (
   `id` varchar(36) NOT NULL COMMENT 'ID',
@@ -87,7 +87,7 @@ CREATE TABLE `auth_account` (
 ) COMMENT='账号'
 ```
 
-### 1.1 初始化账号数据
+### 初始化账号数据
 ```
 --  登录名：zhangsan； 密码：87654321
 insert  into `auth_account`(`id`,`username`,`password`) values
@@ -95,7 +95,7 @@ insert  into `auth_account`(`id`,`username`,`password`) values
 
 ```
 
-## 2. 客户端表`oauth_client_details`
+## 客户端表`oauth_client_details`
 ```
 CREATE TABLE `oauth_client_details` (
   `client_id` varchar(256) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE `oauth_client_details` (
 ) ENGINE=InnoDB;'
 ```
 
-### 2.1 初始化客户端数据
+### 初始化客户端数据
 ```
 --  client_secret=bcrypt("62jxxRnbs7rBwB5F")。 其中"62jxxRnbs7rBwB5F"是client_id为sample-app的密钥。
 insert  into `oauth_client_details`(`client_id`,`resource_ids`,`client_secret`,`scope`,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`,`refresh_token_validity`,`additional_information`,`autoapprove`) values 

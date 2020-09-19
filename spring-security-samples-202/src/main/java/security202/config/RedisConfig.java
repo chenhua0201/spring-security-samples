@@ -10,7 +10,7 @@ import org.springframework.data.redis.serializer.RedisSerializer;
  * Redis配置。
  */
 @Configuration
-public class RedisConfig {
+class RedisConfig {
 
 	/**
 	 * 值序列化改为JSON。

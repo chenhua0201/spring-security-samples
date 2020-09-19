@@ -9,7 +9,7 @@ import org.springframework.session.web.http.HttpSessionIdResolver;
  * 定义session header。
  */
 @Configuration
-public class SpringHttpSessionConfig {
+class SpringHttpSessionConfig {
 
 	@Bean
 	HttpSessionIdResolver httpSessionIdResolver() {

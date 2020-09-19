@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.UserAuthenticationConv
  */
 @Configuration
 @EnableResourceServer
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Autowired
 	private RemoteTokenServices remoteTokenServices;

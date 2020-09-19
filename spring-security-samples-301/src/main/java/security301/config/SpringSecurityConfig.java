@@ -24,7 +24,7 @@ import security301.auth.token.TokenAuthenticationFilter;
  * Spring security配置。
  */
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ObjectMapper objectMapper;

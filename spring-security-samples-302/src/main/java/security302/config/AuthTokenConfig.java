@@ -10,6 +10,6 @@ import security302.auth.token.TokenProperties;
  */
 @Configuration
 @EnableConfigurationProperties({ TokenProperties.class })
-public class AuthTokenConfig {
+class AuthTokenConfig {
 
 }

@@ -34,7 +34,7 @@ import security304.authz.UrlPermissionSecurityMetadataSource;
  */
 @Configuration
 @EnableConfigurationProperties({ AuthzProperties.class })
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ObjectMapper objectMapper;

@@ -11,7 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
  * Spring Security Web配置。
  */
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Bean
 	@Override

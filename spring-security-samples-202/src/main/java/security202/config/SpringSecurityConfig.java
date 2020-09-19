@@ -20,7 +20,7 @@ import security202.auth.restful.RestAuthenticationSuccessHandler;
  * Spring security配置。
  */
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ObjectMapper objectMapper;

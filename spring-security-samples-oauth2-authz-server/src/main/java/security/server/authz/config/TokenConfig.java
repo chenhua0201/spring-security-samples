@@ -20,7 +20,7 @@ import security.server.authz.auth.AuthAccountUserDetails;
  */
 @Configuration
 @EnableConfigurationProperties(TokenProperties.class)
-public class TokenConfig {
+class TokenConfig {
 
 	@Autowired
 	private RedisConnectionFactory redisConnectionFactory;

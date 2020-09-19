@@ -24,7 +24,7 @@ import security203.auth.token.TokenAuthenticationFilter;
  * Spring security配置。
  */
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -46,7 +46,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
 		http.csrf()
 				.disable()// 关闭csrf，避免postman之类的客户端无法获得csrf token
 				.sessionManagement()

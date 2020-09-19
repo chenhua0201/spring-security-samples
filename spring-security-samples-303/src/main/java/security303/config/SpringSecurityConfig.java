@@ -31,7 +31,7 @@ import security303.authz.UrlPermissionSecurityMetadataSource;
  * Spring security配置。
  */
 @Configuration
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ObjectMapper objectMapper;

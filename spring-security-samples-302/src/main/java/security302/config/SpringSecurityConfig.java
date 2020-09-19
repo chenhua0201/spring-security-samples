@@ -26,7 +26,7 @@ import security302.auth.token.TokenAuthenticationFilter;
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private ObjectMapper objectMapper;

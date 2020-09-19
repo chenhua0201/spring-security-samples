@@ -16,7 +16,7 @@ import security304.authz.event.AuthzRefreshEventReceiver;
  * Redis订阅配置。
  */
 @Configuration
-public class RedisListenerConfig {
+class RedisListenerConfig {
 
 	@Autowired
 	private AuthzProperties authzProperties;
