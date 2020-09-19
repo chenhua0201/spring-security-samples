@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * 配置PasswordEncoder。
  */
 @Configuration
-public class PasswordConfig {
+class PasswordConfig {
 
 	/**
 	 * 使用Spring security默认的PasswordEncoder。
