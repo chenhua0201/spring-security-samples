@@ -5,5 +5,5 @@ spring:
   security:
     user:
       name: zhangsan
-      # password: 87654321
-      password: "{bcrypt}$2y$10$mwZYr0mQlXIfaAwBezsBVuEK2cC2zZjJzWGhd.m0dX1iTHDusd3u6"
+      password: 87654321
+      #password: "{bcrypt}$2y$10$mwZYr0mQlXIfaAwBezsBVuEK2cC2zZjJzWGhd.m0dX1iTHDusd3u6"

@@ -4,27 +4,27 @@ Spring Security 5 示例。
 # 软件版本
 - Spring Boot 2.3.4
 - Spring Security 5.3.4
-- Spring Framework 5.2.8
+- Spring Framework 5.2.9
 - JDK 8+
 
 # 最终形态
 - 前后端分离
-- 无状态会话。分布式session，或token header
+- 无状态会话分布式session，或token header
 
 ## 1. 账号密码
-- RESTful 登录、注销、未登录、未授权
+- RESTful 登录、注销、未登录异常、未授权异常
 - 用户数据在MySQL
 
 ## 2. 授权
-- 授权数据在MySQL，并缓存在JVM，而不是Redis
-- ANT风格URI授权
+- 授权数据在MySQL，并缓存在JVM
+- ANT风格URL授权
 - RBAC0
 
 ## 3. 会话保持
-- Servlet Session
+- Servlet Session  
   使用Spring Session Data Redis实现分布式session
-- Token header
-  自定义生成、存储、有效期、header名称
+- Token header  
+  自定义值的生成方式、存储方式、有效期、header名称
 
 # 子项目说明
 **所有项目运行于Servlet而不是WebFlux环境。**
@@ -46,21 +46,21 @@ Spring Security 5 示例。
   + 设置URI是否需要认证
 
 - 106
-  + 使用Spring Session Redis实现分布式session
+  + 使用Spring Session Data Redis实现分布式session
   + 客户端通过cookie传递session id
 
 - 107
-  + 使用Spring Session Redis实现分布式session
+  + 使用Spring Session Data Redis实现分布式session
   + 客户端通过HTTP header传递session id
 
 ## 认证，数据源是MySQL
 - 201
-  + 使用Spring Session Redis实现分布式session
+  + 使用Spring Session Data Redis实现分布式session
   + 客户端通过HTTP header传递session id
   + 自定义`UserDetailsService`，从MySQL读取用户数据
 
 - 202
-  + 使用Spring Session Redis实现分布式session
+  + 使用Spring Session Data Redis实现分布式session
   + 客户端通过HTTP header传递session id
   + 自定义`UserDetailsService`，从MySQL读取用户数据
   + RESTful请求和响应
