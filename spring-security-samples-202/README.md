@@ -4,43 +4,59 @@
 自定义`UserDetailsService`，从MySQL读取用户数据。  
 RESTful请求和响应。  
 
-# 1. 会话
-## 1.1 分布式session
-  - Session存储在Redis
-  - 使用Spring Session Redis
-  - `RedisTemplate`的值序列化改为JSON
+# 会话
+## 分布式Session
+- Session存储在Redis
+- 使用Spring Session Redis
+- `RedisTemplate`的值序列化改为JSON
   
-## 1.2 自定义session超时时长
-  - 见`application.yml`：`spring.servlet.session.timeout`
+## 自定义Session超时时长
+- 见`application.yml`：`spring.servlet.session.timeout`
 
-## 1.3 客户端通过HTTP header保持会话
-  - 见SpringHttpSessionConfig：Header名称默认为`X-Auth-Token`
-  - 访问需要认证的接口时，必须加上该header
-  - 从登录响应里取出`X-Auth-Token`，通过AJAX或postman之类的客户端设置header，才能认证成功
+## 客户端通过HTTP header保持会话
+- 见SpringHttpSessionConfig：header名称默认为`X-Auth-Token`
+- 访问需要认证的接口时，必须加上该header
+- 从登录响应里取出`X-Auth-Token`，通过AJAX或postman之类的客户端设置header，才能认证成功
 
-## 1.4 关闭csrf
-  - 关闭csrf，因为postman之类的客户端无法获得csrf token而导致没有权限访问接口
+## 关闭csrf
+- 关闭csrf，因为postman之类的客户端无法获得csrf token而导致没有权限访问接口
 
-# 2. 账号
-## 2.1 账号在MySQL
-  - 见`AuthAccount`
+# 账号
+## 账号在MySQL
+- 见`AuthAccount`
 
-## 2.2 自定义`UserDetails`
-  - 见`AuthAccountUserDetails`
+## 自定义`UserDetails`
+- 见`AuthAccountUserDetails`
 
-## 2.3 自定义`UserDetailsService`
-  - 见`AuthAccountUserDetailsServiceImpl`
+## 自定义`UserDetailsService`
+- 见`AuthAccountUserDetailsServiceImpl`
 
-# 3. RESTful
-## 3.1 登录请求
-  - 见`restful.LoginForm`
+# RESTful
+## 登录请求
+- 见`restful.LoginForm`  
+```json
+{
+    "username": "zhangsan",
+    "password": "87654321"
+}
+```
 
-## 3.2 认证成功响应
-  - 见`restful.LoginResult`
+## 认证成功响应
+- 见`restful.LoginResult`  
+```json
+{
+    "accountId": "4e4000ba-4c36-4cd0-8a02-4bd7d38e8f38",
+    "username": "zhangsan"
+}
+```
+- 响应header
+```
+X-Auth-Token: e72b2bd1-0cb7-4f40-81b9-c7b6f4a36f4a
+```
 
-## 3.3 认证失败响应
-  - 见`restful.RestAuthenticationFailureHandler`
-  - 返回状态码400和JSON格式消息
+## 认证失败响应
+- 见`restful.RestAuthenticationFailureHandler`
+- 返回状态码400和JSON格式消息  
 ```
   {
     "message": "账号或密码错误",
@@ -48,14 +64,14 @@ RESTful请求和响应。
   }
 ```
 
-## 3.4 未认证401响应
-  - 见`HttpStatusEntryPoint`，返回状态码401
+## 未认证401响应
+- 见`HttpStatusEntryPoint`，返回状态码401
 
-## 3.5 未授权403响应
-  - 见`restful.RestAccessDeniedHandler`，返回状态码403
+## 未授权403响应
+- 见`restful.RestAccessDeniedHandler`，返回状态码403
 
 # 数据库
-## 1. 账号表`auth_account`
+## 账号表`auth_account`
 ```
 CREATE TABLE `auth_account` (
   `id` varchar(36) NOT NULL COMMENT 'ID',
@@ -66,7 +82,7 @@ CREATE TABLE `auth_account` (
 ) COMMENT='账号';
 ```
 
-### 1.1 初始化账号数据
+### 初始化账号数据
 ```
 --  登录名：zhangsan； 密码：87654321
 insert  into `auth_account`(`id`,`username`,`password`) values
