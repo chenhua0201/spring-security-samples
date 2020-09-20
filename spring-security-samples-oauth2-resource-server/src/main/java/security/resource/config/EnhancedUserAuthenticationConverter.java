@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
  * 按照spring-security-samples-oauth2-authz-server的TokenEnhancer的格式，读取额外的token信息。
  */
 @Service
-public class EnhancedUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
+class EnhancedUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
 
 	private Collection<? extends GrantedAuthority> defaultAuthorities;
 
