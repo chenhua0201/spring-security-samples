@@ -1,6 +1,7 @@
 package security.resource.config;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,23 +18,25 @@ import org.springframework.util.StringUtils;
 @Service
 class EnhancedUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
 
-	private Collection<? extends GrantedAuthority> defaultAuthorities;
+	private final Collection<GrantedAuthority> defaultAuthorities = Collections.emptySet();
+
+	private final String PASSWORD_NA = "N/A";
 
 	@Override
 	public Authentication extractAuthentication(Map<String, ?> map) {
 		if (map.containsKey(USERNAME)) {
-			final Collection<? extends GrantedAuthority> authorities = getAuthorities(map);
+			final Collection<GrantedAuthority> authorities = getAuthorities(map);
 
 			final String userId = (String) map.get("userId");
 			final String username = (String) map.get("username");
 
-			final AuthAccountUserDetails user = new AuthAccountUserDetails(userId, username, null);
-			return new UsernamePasswordAuthenticationToken(user, "N/A", authorities);
+			final AuthAccountUserDetails user = new AuthAccountUserDetails(userId, username, PASSWORD_NA, authorities);
+			return new UsernamePasswordAuthenticationToken(user, PASSWORD_NA, authorities);
 		}
 		return null;
 	}
 
-	private Collection<? extends GrantedAuthority> getAuthorities(Map<String, ?> map) {
+	private Collection<GrantedAuthority> getAuthorities(Map<String, ?> map) {
 		if (!map.containsKey(AUTHORITIES)) {
 			return defaultAuthorities;
 		}
