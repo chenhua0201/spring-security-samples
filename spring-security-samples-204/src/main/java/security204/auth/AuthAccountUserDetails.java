@@ -2,7 +2,6 @@ package security204.auth;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +20,7 @@ public class AuthAccountUserDetails implements UserDetails {
 	private final boolean accountNonLocked;
 
 	// 角色名称
-	private final Set<GrantedAuthority> authorities;
+	private final Collection<? extends GrantedAuthority> authorities;
 
 	private final boolean credentialsNonExpired;
 
@@ -38,7 +37,7 @@ public class AuthAccountUserDetails implements UserDetails {
 				Collections.emptySet());
 	}
 
-	public AuthAccountUserDetails(AuthAccount account, Set<GrantedAuthority> authorities) {
+	public AuthAccountUserDetails(AuthAccount account, Collection<? extends GrantedAuthority> authorities) {
 		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, true, authorities);
 	}
 
@@ -48,7 +47,7 @@ public class AuthAccountUserDetails implements UserDetails {
 
 	public AuthAccountUserDetails(String id, String username, String password, boolean accountNonExpired,
 			boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled,
-			Set<GrantedAuthority> authorities) {
+			Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
