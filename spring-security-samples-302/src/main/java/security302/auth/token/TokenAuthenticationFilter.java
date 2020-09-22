@@ -44,7 +44,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		String token = request.getHeader(tokenProperties.getHeader());
 
 		if (StringUtils.isNotBlank(token)) {
-			token = StringUtils.removeStart(token, tokenProperties.getHeaderValuePrefix())
+			token = StringUtils.removeStartIgnoreCase(token, tokenProperties.getHeaderValuePrefix())
 					.trim();
 			final TokenValue tokenValue = tokenService.findByToken(token);
 			if (tokenValue != null && SecurityContextHolder.getContext()
