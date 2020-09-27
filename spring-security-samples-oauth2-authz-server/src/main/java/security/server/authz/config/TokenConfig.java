@@ -31,7 +31,7 @@ class TokenConfig {
 	@Bean
 	public TokenEnhancer tokenEnhancer() {
 		return (accessToken, authentication) -> {
-			final Map<String, Object> additionalInfo = new HashMap<>(4);
+			final Map<String, Object> additionalInfo = new HashMap<>();
 			final AuthAccountUserDetails user = (AuthAccountUserDetails) authentication.getUserAuthentication()
 					.getPrincipal();
 			additionalInfo.put("userId", user.getId());
