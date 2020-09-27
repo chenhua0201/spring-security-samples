@@ -42,7 +42,7 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager)// 启用对password模式的支持
+		endpoints.authenticationManager(authenticationManager)
 				.tokenStore(tokenStore)
 				.tokenEnhancer(tokenEnhancer)
 				.userDetailsService(userDetailsService)
@@ -52,7 +52,7 @@ class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) {
-		security.checkTokenAccess("isAuthenticated()")/// oauth/check_token
+		security.checkTokenAccess("isAuthenticated()")// oauth/check_token
 				// 允许表单认证
 				.allowFormAuthenticationForClients();
 	}
