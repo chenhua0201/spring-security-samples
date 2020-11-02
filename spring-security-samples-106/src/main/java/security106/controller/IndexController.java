@@ -15,4 +15,5 @@ public class IndexController {
 	public String index() {
 		return "这是首页";
 	}
+
 }

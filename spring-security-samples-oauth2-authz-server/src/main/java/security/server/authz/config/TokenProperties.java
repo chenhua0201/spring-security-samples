@@ -12,4 +12,5 @@ import lombok.Data;
 public class TokenProperties {
 
 	private String prefix = "";
+
 }

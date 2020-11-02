@@ -16,4 +16,5 @@ public class DemoController {
 		return SecurityContextHolder.getContext()
 				.getAuthentication();
 	}
+
 }

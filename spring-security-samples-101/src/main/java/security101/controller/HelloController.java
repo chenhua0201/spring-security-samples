@@ -22,4 +22,5 @@ public class HelloController {
 		return SecurityContextHolder.getContext()
 				.getAuthentication();
 	}
+
 }

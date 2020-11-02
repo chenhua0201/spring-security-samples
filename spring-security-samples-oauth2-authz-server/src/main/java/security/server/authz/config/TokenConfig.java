@@ -48,4 +48,5 @@ class TokenConfig {
 		tokenStore.setPrefix(tokenProperties.getPrefix());
 		return tokenStore;
 	}
+
 }

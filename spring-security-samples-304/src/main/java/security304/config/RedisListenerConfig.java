@@ -39,4 +39,5 @@ class RedisListenerConfig {
 
 		return container;
 	}
+
 }

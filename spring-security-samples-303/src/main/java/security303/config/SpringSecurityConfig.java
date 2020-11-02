@@ -75,6 +75,7 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 						fsi.setAccessDecisionManager(new AffirmativeBased(Arrays.asList(urlAccessDecisionVoter)));
 						return fsi;
 					}
+
 				})
 				.and()
 				.exceptionHandling()
@@ -99,4 +100,5 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		// token过滤器
 		http.addFilterBefore(tokenAuthenticationFilter, BasicAuthenticationFilter.class);
 	}
+
 }

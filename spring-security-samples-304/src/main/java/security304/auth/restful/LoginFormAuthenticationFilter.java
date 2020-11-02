@@ -130,4 +130,5 @@ public class LoginFormAuthenticationFilter extends AbstractAuthenticationProcess
 		Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
 		this.usernameParameter = usernameParameter;
 	}
+
 }

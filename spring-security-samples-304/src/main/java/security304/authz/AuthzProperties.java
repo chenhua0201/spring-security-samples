@@ -15,4 +15,5 @@ public class AuthzProperties {
 	 * 授权缓存redis topic
 	 */
 	private String cacheTopic = "authz:refresh";
+
 }

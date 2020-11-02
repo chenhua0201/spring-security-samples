@@ -23,4 +23,5 @@ public interface TokenService {
 	 * @return 值
 	 */
 	TokenValue findByToken(String token);
+
 }

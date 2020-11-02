@@ -77,4 +77,5 @@ public class TokenServiceRedis implements TokenService {
 			return token;
 		}
 	}
+
 }

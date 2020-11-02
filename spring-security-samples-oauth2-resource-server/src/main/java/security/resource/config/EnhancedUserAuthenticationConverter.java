@@ -50,4 +50,5 @@ class EnhancedUserAuthenticationConverter extends DefaultUserAuthenticationConve
 		}
 		throw new IllegalArgumentException("Authorities must be either a String or a Collection");
 	}
+
 }

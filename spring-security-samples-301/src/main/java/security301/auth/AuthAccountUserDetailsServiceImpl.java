@@ -53,4 +53,5 @@ public class AuthAccountUserDetailsServiceImpl implements UserDetailsService {
 
 		return new AuthAccountUserDetails(account, grantedAuthorities);
 	}
+
 }

@@ -60,4 +60,5 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		// 用重写的Filter替换掉原有的UsernamePasswordAuthenticationFilter
 		http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
 	}
+
 }

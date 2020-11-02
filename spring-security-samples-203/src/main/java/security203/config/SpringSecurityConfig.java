@@ -77,4 +77,5 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		// token过滤器
 		http.addFilterBefore(tokenAuthenticationFilter, BasicAuthenticationFilter.class);
 	}
+
 }

@@ -103,4 +103,5 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				authenticationManagerBean(), grantedAuthorityConverter, tokenProperties, tokenService);
 		http.addFilterBefore(tokenAuthenticationFilter, BasicAuthenticationFilter.class);
 	}
+
 }

@@ -32,4 +32,5 @@ public interface AuthRoleRepository {
 	 * @return 超级角色列表
 	 */
 	List<AuthRole> findSuper();
+
 }

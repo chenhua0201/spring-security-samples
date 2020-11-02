@@ -17,4 +17,5 @@ public class LoginForm {
 	 * 登录密码
 	 */
 	private String password;
+
 }

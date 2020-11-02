@@ -69,4 +69,5 @@ public class AuthRoleRepositoryImpl implements AuthRoleRepository {
 
 		return jdbcTemplate.query(sql, authRoleMapper);
 	}
+
 }

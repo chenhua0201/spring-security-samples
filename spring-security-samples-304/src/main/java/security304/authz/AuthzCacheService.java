@@ -32,4 +32,5 @@ public interface AuthzCacheService {
 	 * @return 超级角色标识列表
 	 */
 	Set<String> findSuperRoleIdentifiers();
+
 }

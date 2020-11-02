@@ -17,4 +17,5 @@ public interface ConfigAttributeService {
 	 * @return FilterInvocation关联的ConfigAttribute
 	 */
 	Collection<ConfigAttribute> findByFilterInvocation(FilterInvocation filterInvocation);
+
 }

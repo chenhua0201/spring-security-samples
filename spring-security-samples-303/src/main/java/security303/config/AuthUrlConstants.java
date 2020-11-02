@@ -13,4 +13,5 @@ public class AuthUrlConstants {
 	private AuthUrlConstants() {
 
 	}
+
 }
