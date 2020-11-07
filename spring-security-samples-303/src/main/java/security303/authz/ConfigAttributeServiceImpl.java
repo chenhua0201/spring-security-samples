@@ -12,8 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Service;
-import org.springframework.util.AntPathMatcher;
 
 import security303.auth.entity.AuthPermission;
 import security303.auth.entity.AuthRole;
@@ -32,6 +32,8 @@ import security303.auth.repository.AuthRoleRepository;
 @Service
 public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 
+	private static final String ANY_METHOD = "*";
+
 	/**
 	 * 随机角色标识，用于避免返回空集合
 	 */
@@ -40,8 +42,6 @@ public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 			+ Instant.now()
 					.toEpochMilli());
 
-	private final AntPathMatcher antPathMatcher = new AntPathMatcher();
-
 	@Autowired
 	private AuthPermissionRepository authPermissionRepository;
 
@@ -49,7 +49,7 @@ public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 	private AuthRoleRepository authRoleRepository;
 
 	@Override
-	public Collection<ConfigAttribute> findByFilterInvocation(FilterInvocation filterInvocation) {
+	public Collection<ConfigAttribute> findByFilterInvocation(final FilterInvocation filterInvocation) {
 		// 请求的URL匹配的权限ID列表
 		final Set<String> urlPermissionIds = authPermissionRepository.findAll()
 				.parallelStream()
@@ -83,15 +83,17 @@ public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 		return RANDOM;
 	}
 
-	private boolean isUrlAllowed(AuthPermission permission, FilterInvocation filterInvocation) {
-		// URL不匹配
-		if (!antPathMatcher.match(permission.getUrl(), filterInvocation.getRequestUrl())) {
+	private boolean isUrlAllowed(final AuthPermission permission, final FilterInvocation filterInvocation) {
+		// 检查servletPath + pathInfo
+		final AntPathRequestMatcher matcher = new AntPathRequestMatcher(permission.getUrl());
+		final boolean matches = matcher.matches(filterInvocation.getHttpRequest());
+		if (!matches) {
 			return false;
 		}
 
 		// 检查HTTP method
 		final String permissionMethod = StringUtils.trimToEmpty(permission.getMethod());
-		if ("*".equals(permissionMethod)) {
+		if (ANY_METHOD.equals(permissionMethod)) {
 			// *表示任意HTTP method
 			return true;
 		}
@@ -100,7 +102,7 @@ public class ConfigAttributeServiceImpl implements ConfigAttributeService {
 				.getMethod();
 		final String[] methods = StringUtils.split(permissionMethod, ",");
 		for (final String method : methods) {
-			if (method.trim()
+			if (method.strip()
 					.equalsIgnoreCase(httpMethod)) {
 				return true;
 			}
