@@ -22,11 +22,12 @@ public class TokenLogoutHandler implements LogoutHandler {
 	private TokenService tokenService;
 
 	@Override
-	public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+	public void logout(final HttpServletRequest request, final HttpServletResponse response,
+			final Authentication authentication) {
 		final String token = request.getHeader(tokenProperties.getHeader());
 
 		if (StringUtils.isNotBlank(token)) {
-			tokenService.delete(StringUtils.removeStart(token, tokenProperties.getHeaderValuePrefix())
+			tokenService.delete(StringUtils.removeStartIgnoreCase(token, tokenProperties.getHeaderValuePrefix())
 					.trim());
 		}
 	}
