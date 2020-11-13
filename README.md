@@ -2,9 +2,9 @@
 Spring Security 5 示例。
 
 # 软件版本
-- Spring Boot 2.3.5
-- Spring Security 5.3.5
-- Spring Framework 5.2.10
+- Spring Boot 2.4.0
+- Spring Security 5.4.1
+- Spring Framework 5.3.1
 - JDK 11+
 
 # 最终形态
