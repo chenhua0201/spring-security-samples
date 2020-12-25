@@ -12,11 +12,11 @@ public class AuthzRefreshEventReceiver {
 
 	private final ApplicationEventPublisher publisher;
 
-	public AuthzRefreshEventReceiver(ApplicationEventPublisher publisher) {
+	public AuthzRefreshEventReceiver(final ApplicationEventPublisher publisher) {
 		this.publisher = publisher;
 	}
 
-	public void receive(String message) {
+	public void receive(final String message) {
 		log.info("receive authz refresh message");
 		publisher.publishEvent(new AuthzRefreshEvent(message));
 	}

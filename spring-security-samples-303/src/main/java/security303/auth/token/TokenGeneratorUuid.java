@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class TokenGeneratorUuid implements TokenGenerator {
 
 	@Override
-	public String generate(Object principal) {
+	public String generate(final Object principal) {
 		return UUID.randomUUID()
 				.toString();
 	}

@@ -15,7 +15,7 @@ public class FilterInvocationCacheKey {
 	public FilterInvocationCacheKey() {
 	}
 
-	public FilterInvocationCacheKey(String requestUrl, String httpMethod) {
+	public FilterInvocationCacheKey(final String requestUrl, final String httpMethod) {
 		this.requestUrl = requestUrl;
 		this.httpMethod = httpMethod;
 	}

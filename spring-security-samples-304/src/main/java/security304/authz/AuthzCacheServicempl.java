@@ -60,7 +60,7 @@ public class AuthzCacheServicempl implements AuthzCacheService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Collection<ConfigAttribute> findByFilterInvocation(FilterInvocation filterInvocation) {
+	public Collection<ConfigAttribute> findByFilterInvocation(final FilterInvocation filterInvocation) {
 		return filterInvocationCache.computeIfAbsent(
 				new FilterInvocationCacheKey(filterInvocation.getRequestUrl(), filterInvocation.getHttpRequest()
 						.getMethod()),
@@ -87,7 +87,7 @@ public class AuthzCacheServicempl implements AuthzCacheService {
 	 * @param event 授权缓存刷新事件
 	 */
 	@EventListener
-	public void refresh(AuthzRefreshEvent event) {
+	public void refresh(final AuthzRefreshEvent event) {
 		clear();
 	}
 

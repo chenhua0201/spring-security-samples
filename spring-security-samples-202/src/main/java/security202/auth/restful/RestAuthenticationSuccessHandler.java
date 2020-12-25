@@ -26,13 +26,13 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	private final ObjectMapper objectMapper;
 
 	@Autowired
-	public RestAuthenticationSuccessHandler(ObjectMapper objectMapper) {
+	public RestAuthenticationSuccessHandler(final ObjectMapper objectMapper) {
 		this.objectMapper = objectMapper;
 	}
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws ServletException, IOException {
+	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
+			final Authentication authentication) throws ServletException, IOException {
 		response.setStatus(HttpServletResponse.SC_OK);
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 

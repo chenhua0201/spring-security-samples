@@ -22,7 +22,7 @@ public class AuthAccountUserDetailsServiceImpl implements UserDetailsService {
 	private AuthAccountRepository authAccountRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 		if (StringUtils.isBlank(username)) {
 			log.warn("Username is empty");
 			throw new UsernameNotFoundException("账号不存在：" + username);

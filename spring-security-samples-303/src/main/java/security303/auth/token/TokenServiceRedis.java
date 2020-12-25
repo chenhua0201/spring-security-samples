@@ -25,7 +25,7 @@ public class TokenServiceRedis implements TokenService {
 	private final TokenProperties tokenProperties;
 
 	@Override
-	public String create(Object principal, TokenValue value) {
+	public String create(final Object principal, final TokenValue value) {
 		final String token = tokenGenerator.generate(principal);
 
 		final String key = key(token);
@@ -44,12 +44,12 @@ public class TokenServiceRedis implements TokenService {
 	}
 
 	@Override
-	public void delete(String token) {
+	public void delete(final String token) {
 		stringRedisTemplate.delete(key(token));
 	}
 
 	@Override
-	public TokenValue findByToken(String token) {
+	public TokenValue findByToken(final String token) {
 		final String json = stringRedisTemplate.opsForValue()
 				.get(key(token));
 		if (StringUtils.isNotBlank(json)) {
@@ -69,7 +69,7 @@ public class TokenServiceRedis implements TokenService {
 	 * @param token token
 	 * @return token加前缀
 	 */
-	private String key(String token) {
+	private String key(final String token) {
 		final String prefix = tokenProperties.getPrefix();
 		if (StringUtils.isNotBlank(prefix)) {
 			return prefix + ":" + token;

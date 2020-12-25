@@ -33,15 +33,15 @@ public class AuthRoleRepositoryImpl implements AuthRoleRepository {
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public AuthRoleRepositoryImpl(DataSource dataSource) {
+	public AuthRoleRepositoryImpl(final DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
-	public List<AuthRole> findByAccountId(String accountId) {
+	public List<AuthRole> findByAccountId(final String accountId) {
 		final String sql = "SELECT r.id, r.name, r.identifier, r.super_role FROM auth_role AS r INNER JOIN auth_account_role AS j ON r.id = j.role_id WHERE j.account_id = ?";
 
-		return jdbcTemplate.query(sql, new Object[] { accountId }, authRoleMapper);
+		return jdbcTemplate.query(sql, authRoleMapper, accountId);
 	}
 
 }

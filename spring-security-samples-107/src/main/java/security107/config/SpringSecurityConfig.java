@@ -19,7 +19,7 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	private PasswordEncoder passwordEncoder;
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 		// 创建多个内存用户
 		auth.inMemoryAuthentication()
 				.withUser("zhangsan")// 用户张三
@@ -32,7 +32,7 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(final HttpSecurity http) throws Exception {
 		http.csrf()
 				.disable()// 关闭csrf，避免postman之类的客户端无法获得csrf token
 				.authorizeRequests()

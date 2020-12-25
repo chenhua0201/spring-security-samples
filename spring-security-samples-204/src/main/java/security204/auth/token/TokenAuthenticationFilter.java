@@ -29,9 +29,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
 	private final TokenService tokenService;
 
-	public TokenAuthenticationFilter(AuthenticationManager authenticationManager,
-			GrantedAuthorityConverter grantedAuthorityConverter, TokenProperties tokenProperties,
-			TokenService tokenService) {
+	public TokenAuthenticationFilter(final AuthenticationManager authenticationManager,
+			final GrantedAuthorityConverter grantedAuthorityConverter, final TokenProperties tokenProperties,
+			final TokenService tokenService) {
 		this.authenticationManager = authenticationManager;
 		this.grantedAuthorityConverter = grantedAuthorityConverter;
 		this.tokenProperties = tokenProperties;
@@ -39,8 +39,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	}
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
+	protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
+			final FilterChain filterChain) throws ServletException, IOException {
 		if (SecurityContextHolder.getContext()
 				.getAuthentication() == null) {
 			final String bearer = request.getHeader(tokenProperties.getHeader());

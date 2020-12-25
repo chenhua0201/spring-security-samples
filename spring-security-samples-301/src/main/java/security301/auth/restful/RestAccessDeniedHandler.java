@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
 	@Override
-	public void handle(HttpServletRequest request, HttpServletResponse response,
-			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+	public void handle(final HttpServletRequest request, final HttpServletResponse response,
+			final AccessDeniedException accessDeniedException) throws IOException, ServletException {
 		response.sendError(HttpStatus.FORBIDDEN.value());
 	}
 

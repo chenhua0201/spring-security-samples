@@ -21,17 +21,18 @@ public class UrlAccessDecisionVoter implements AccessDecisionVoter<Object> {
 	private AuthzCacheService authzCacheService;
 
 	@Override
-	public boolean supports(Class<?> clazz) {
+	public boolean supports(final Class<?> clazz) {
 		return true;
 	}
 
 	@Override
-	public boolean supports(ConfigAttribute attribute) {
+	public boolean supports(final ConfigAttribute attribute) {
 		return true;
 	}
 
 	@Override
-	public int vote(Authentication authentication, Object object, Collection<ConfigAttribute> attributes) {
+	public int vote(final Authentication authentication, final Object object,
+			final Collection<ConfigAttribute> attributes) {
 		// 用户的角色标识列表
 		final Set<String> accountRoleIdentifiers = authentication.getAuthorities()
 				.parallelStream()

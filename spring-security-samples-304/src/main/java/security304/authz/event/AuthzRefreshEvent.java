@@ -9,7 +9,7 @@ public class AuthzRefreshEvent extends ApplicationEvent {
 
 	private static final long serialVersionUID = 1L;
 
-	public AuthzRefreshEvent(Object source) {
+	public AuthzRefreshEvent(final Object source) {
 		super(source);
 	}
 

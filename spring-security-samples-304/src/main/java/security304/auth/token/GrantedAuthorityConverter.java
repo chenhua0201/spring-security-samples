@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class GrantedAuthorityConverter {
 
-	public Collection<? extends GrantedAuthority> decode(Set<String> strings) {
+	public Collection<? extends GrantedAuthority> decode(final Set<String> strings) {
 		if (strings == null) {
 			return Collections.emptySet();
 		}
@@ -25,7 +25,7 @@ public class GrantedAuthorityConverter {
 				.collect(Collectors.toSet());
 	}
 
-	public Set<String> encode(Collection<? extends GrantedAuthority> authorities) {
+	public Set<String> encode(final Collection<? extends GrantedAuthority> authorities) {
 		if (authorities == null) {
 			return Collections.emptySet();
 		}

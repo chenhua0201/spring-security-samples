@@ -28,12 +28,12 @@ public class UrlPermissionSecurityMetadataSource implements FilterInvocationSecu
 	 * 查询URL关联了哪些角色。返回null或空集合表示该URL不需要授权。
 	 */
 	@Override
-	public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
+	public Collection<ConfigAttribute> getAttributes(final Object object) throws IllegalArgumentException {
 		return configAttributeService.findByFilterInvocation((FilterInvocation) object);
 	}
 
 	@Override
-	public boolean supports(Class<?> clazz) {
+	public boolean supports(final Class<?> clazz) {
 		return FilterInvocation.class.isAssignableFrom(clazz);
 	}
 

@@ -58,7 +58,7 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UrlPermissionSecurityMetadataSource urlPermissionSecurityMetadataSource;
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(final HttpSecurity http) throws Exception {
 		http.csrf()
 				.disable()// 关闭csrf，避免postman之类的客户端无法获得csrf token
 				.sessionManagement()
@@ -70,7 +70,7 @@ class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 				.withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
 
 					@Override
-					public <O extends FilterSecurityInterceptor> O postProcess(O fsi) {
+					public <O extends FilterSecurityInterceptor> O postProcess(final O fsi) {
 						fsi.setSecurityMetadataSource(urlPermissionSecurityMetadataSource);
 						fsi.setAccessDecisionManager(new AffirmativeBased(Arrays.asList(urlAccessDecisionVoter)));
 						return fsi;

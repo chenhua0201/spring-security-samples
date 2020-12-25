@@ -33,7 +33,7 @@ public class AuthPermissionRepositoryImpl implements AuthPermissionRepository {
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public AuthPermissionRepositoryImpl(DataSource dataSource) {
+	public AuthPermissionRepositoryImpl(final DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 

@@ -32,22 +32,22 @@ public class AuthAccountUserDetails implements UserDetails {
 
 	private final String username;
 
-	public AuthAccountUserDetails(AuthAccount account) {
+	public AuthAccountUserDetails(final AuthAccount account) {
 		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, true,
 				Collections.emptySet());
 	}
 
-	public AuthAccountUserDetails(AuthAccount account, Collection<? extends GrantedAuthority> authorities) {
+	public AuthAccountUserDetails(final AuthAccount account, final Collection<? extends GrantedAuthority> authorities) {
 		this(account.getId(), account.getUsername(), account.getPassword(), true, true, true, true, authorities);
 	}
 
-	public AuthAccountUserDetails(String id, String username, String password) {
+	public AuthAccountUserDetails(final String id, final String username, final String password) {
 		this(id, username, password, true, true, true, true, Collections.emptySet());
 	}
 
-	public AuthAccountUserDetails(String id, String username, String password, boolean accountNonExpired,
-			boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled,
-			Collection<? extends GrantedAuthority> authorities) {
+	public AuthAccountUserDetails(final String id, final String username, final String password,
+			final boolean accountNonExpired, final boolean accountNonLocked, final boolean credentialsNonExpired,
+			final boolean enabled, final Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.password = password;

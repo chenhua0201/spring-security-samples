@@ -25,17 +25,18 @@ public class UrlAccessDecisionVoter implements AccessDecisionVoter<Object> {
 	private AuthRoleRepository authRoleRepository;
 
 	@Override
-	public boolean supports(Class<?> clazz) {
+	public boolean supports(final Class<?> clazz) {
 		return true;
 	}
 
 	@Override
-	public boolean supports(ConfigAttribute attribute) {
+	public boolean supports(final ConfigAttribute attribute) {
 		return true;
 	}
 
 	@Override
-	public int vote(Authentication authentication, Object object, Collection<ConfigAttribute> attributes) {
+	public int vote(final Authentication authentication, final Object object,
+			final Collection<ConfigAttribute> attributes) {
 		final Set<String> roleIdentifiers = authentication.getAuthorities()
 				.parallelStream()
 				.map(GrantedAuthority::getAuthority)

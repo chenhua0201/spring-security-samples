@@ -16,7 +16,7 @@ public class TokenAuthenticationToken implements Authentication {
 
 	private boolean authenticated = false;
 
-	public TokenAuthenticationToken(String token) {
+	public TokenAuthenticationToken(final String token) {
 		this.token = token;
 
 		setAuthenticated(true);
@@ -77,7 +77,7 @@ public class TokenAuthenticationToken implements Authentication {
 	}
 
 	@Override
-	public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+	public void setAuthenticated(final boolean isAuthenticated) throws IllegalArgumentException {
 		this.authenticated = isAuthenticated;
 	}
 

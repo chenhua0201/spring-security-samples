@@ -37,13 +37,13 @@ public class LoginFormAuthenticationFilter extends AbstractAuthenticationProcess
 
 	private boolean postOnly = true;
 
-	public LoginFormAuthenticationFilter(ObjectMapper objectMapper) {
+	public LoginFormAuthenticationFilter(final ObjectMapper objectMapper) {
 		super(new AntPathRequestMatcher(AuthUrlConstants.LOGIN, "POST"));
 		this.objectMapper = objectMapper;
 	}
 
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+	public Authentication attemptAuthentication(final HttpServletRequest request, final HttpServletResponse response)
 			throws AuthenticationException {
 		if (postOnly && !request.getMethod()
 				.equals("POST")) {
@@ -75,7 +75,7 @@ public class LoginFormAuthenticationFilter extends AbstractAuthenticationProcess
 		return usernameParameter;
 	}
 
-	private LoginForm obtain(HttpServletRequest request) {
+	private LoginForm obtain(final HttpServletRequest request) {
 		try (InputStream is = request.getInputStream()) {
 			return objectMapper.readValue(is, LoginForm.class);
 		} catch (final IOException e) {
@@ -92,7 +92,7 @@ public class LoginFormAuthenticationFilter extends AbstractAuthenticationProcess
 	 * @param authRequest the authentication request object that should have its
 	 *                    details set
 	 */
-	protected void setDetails(HttpServletRequest request, UsernamePasswordAuthenticationToken authRequest) {
+	protected void setDetails(final HttpServletRequest request, final UsernamePasswordAuthenticationToken authRequest) {
 		authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
 	}
 
@@ -102,7 +102,7 @@ public class LoginFormAuthenticationFilter extends AbstractAuthenticationProcess
 	 *
 	 * @param passwordParameter the parameter name. Defaults to "password".
 	 */
-	public void setPasswordParameter(String passwordParameter) {
+	public void setPasswordParameter(final String passwordParameter) {
 		Assert.hasText(passwordParameter, "Password parameter must not be empty or null");
 		this.passwordParameter = passwordParameter;
 	}
@@ -116,7 +116,7 @@ public class LoginFormAuthenticationFilter extends AbstractAuthenticationProcess
 	 * <p>
 	 * Defaults to <tt>true</tt> but may be overridden by subclasses.
 	 */
-	public void setPostOnly(boolean postOnly) {
+	public void setPostOnly(final boolean postOnly) {
 		this.postOnly = postOnly;
 	}
 
@@ -126,7 +126,7 @@ public class LoginFormAuthenticationFilter extends AbstractAuthenticationProcess
 	 *
 	 * @param usernameParameter the parameter name. Defaults to "username".
 	 */
-	public void setUsernameParameter(String usernameParameter) {
+	public void setUsernameParameter(final String usernameParameter) {
 		Assert.hasText(usernameParameter, "Username parameter must not be empty or null");
 		this.usernameParameter = usernameParameter;
 	}

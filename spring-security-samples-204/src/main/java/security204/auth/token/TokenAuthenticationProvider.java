@@ -12,12 +12,12 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 
 	private final TokenService tokenService;
 
-	public TokenAuthenticationProvider(TokenService tokenService) {
+	public TokenAuthenticationProvider(final TokenService tokenService) {
 		this.tokenService = tokenService;
 	}
 
 	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+	public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
 		if (!supports(authentication.getClass())) {
 			return null;
 		}
@@ -35,8 +35,8 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 	}
 
 	@Override
-	public boolean supports(Class<?> authentication) {
-		return (TokenAuthenticationToken.class.isAssignableFrom(authentication));
+	public boolean supports(final Class<?> authentication) {
+		return TokenAuthenticationToken.class.isAssignableFrom(authentication);
 	}
 
 }

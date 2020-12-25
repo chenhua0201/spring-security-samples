@@ -32,15 +32,15 @@ public class AuthAccountRepositoryImpl implements AuthAccountRepository {
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
-	public AuthAccountRepositoryImpl(DataSource dataSource) {
+	public AuthAccountRepositoryImpl(final DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
 	@Override
-	public AuthAccount findByUsername(String username) {
+	public AuthAccount findByUsername(final String username) {
 		final String sql = "SELECT id,username,password FROM auth_account WHERE username=?";
 
-		final List<AuthAccount> accounts = jdbcTemplate.query(sql, new Object[] { username }, authAccountMapper);
+		final List<AuthAccount> accounts = jdbcTemplate.query(sql, authAccountMapper, username);
 
 		return accounts == null || accounts.isEmpty() ? null : accounts.get(0);
 	}

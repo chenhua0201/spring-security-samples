@@ -36,8 +36,8 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	private final TokenService tokenService;
 
 	@Autowired
-	public RestAuthenticationSuccessHandler(GrantedAuthorityConverter grantedAuthorityConverter,
-			ObjectMapper objectMapper, TokenProperties tokenProperties, TokenService tokenService) {
+	public RestAuthenticationSuccessHandler(final GrantedAuthorityConverter grantedAuthorityConverter,
+			final ObjectMapper objectMapper, final TokenProperties tokenProperties, final TokenService tokenService) {
 		this.grantedAuthorityConverter = grantedAuthorityConverter;
 		this.objectMapper = objectMapper;
 		this.tokenProperties = tokenProperties;
@@ -45,8 +45,8 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	}
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-			Authentication authentication) throws ServletException, IOException {
+	public void onAuthenticationSuccess(final HttpServletRequest request, final HttpServletResponse response,
+			final Authentication authentication) throws ServletException, IOException {
 		response.setStatus(HttpServletResponse.SC_OK);
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 

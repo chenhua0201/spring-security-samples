@@ -31,16 +31,16 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 	private final TokenService tokenService;
 
 	@Autowired
-	public TokenAuthenticationFilter(GrantedAuthorityConverter grantedAuthorityConverter,
-			TokenProperties tokenProperties, TokenService tokenService) {
+	public TokenAuthenticationFilter(final GrantedAuthorityConverter grantedAuthorityConverter,
+			final TokenProperties tokenProperties, final TokenService tokenService) {
 		this.grantedAuthorityConverter = grantedAuthorityConverter;
 		this.tokenProperties = tokenProperties;
 		this.tokenService = tokenService;
 	}
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-			throws ServletException, IOException {
+	protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
+			final FilterChain filterChain) throws ServletException, IOException {
 		String token = request.getHeader(tokenProperties.getHeader());
 
 		if (StringUtils.isNotBlank(token)) {
