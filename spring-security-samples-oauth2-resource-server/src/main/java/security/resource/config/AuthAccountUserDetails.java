@@ -29,9 +29,9 @@ public class AuthAccountUserDetails implements UserDetails {
 
 	private final String username;
 
-	public AuthAccountUserDetails(String id, String username, String password, boolean accountNonExpired,
-			boolean accountNonLocked, boolean credentialsNonExpired, boolean enabled,
-			Collection<GrantedAuthority> authorities) {
+	public AuthAccountUserDetails(final String id, final String username, final String password,
+			final boolean accountNonExpired, final boolean accountNonLocked, final boolean credentialsNonExpired,
+			final boolean enabled, final Collection<? extends GrantedAuthority> authorities) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -42,8 +42,8 @@ public class AuthAccountUserDetails implements UserDetails {
 		this.authorities = authorities;
 	}
 
-	public AuthAccountUserDetails(String id, String username, String password,
-			Collection<GrantedAuthority> authorities) {
+	public AuthAccountUserDetails(final String id, final String username, final String password,
+			final Collection<? extends GrantedAuthority> authorities) {
 		this(id, username, password, true, true, true, true, authorities);
 	}
 
